@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    font-family: 'sans-serif';
+    font-size: 20px;
+}
+
+body {
+    background: #141414
+}
+
+.Header {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+.Header__Title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-left: 1rem
+}
+
+.Header__Navbar {
+    margin-left: auto;
+    padding: 1rem;
+}
+
+.Header__Navbar ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none
+}
+
+.Header__Navbar ul li {
+    margin: 0 0.25rem 0 0.25rem;
+}
+
+.Header__Navbar ul li a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #fff
+}
+
+.Header__Navbar ul li a:hover {
+    color: grey
+}
+
+.Form {
+    max-width: 420px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Form__Title {
+    margin: 1rem;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.Form__Input {
+    margin: .3rem;
+    text-align: center
+}
+
+.Form__Input input {
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
+    border: 0.025rem solid transparent;
+    border-radius: 20px;
+}
+
+.Form__Input input:focus {
+    background-color: #141414;
+    border: 0.025rem solid #fff;
+    color: #fff;
+}
+
+.Form__Input input:focus::placeholder {
+    color: #fff
+}
+
+.Form__Submit input {
+    margin: 1rem;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border: 0.025rem solid transparent;
+}
+
+
+.Form__Submit input,
+.Form__Submit a {
+    margin: 1rem;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border: 0.025rem solid transparent;
+    text-decoration: none;
+}
+
+.Form__Submit a:hover {
+    color: grey;
+}

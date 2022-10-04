@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static '/css/login-style.css' %}">
+    <title>Library Interface</title>
+</head>
+
+<body>
+    <header class="Header">
+        <div class="Header__Title">Library</div>
+        <nav class="Header__Navbar">
+            <ul>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="Container">
+        <form class="Form" action="" method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            <h1 class="Form__Title">Login</h1>
+
+            <div class="Form__Input">
+                <input type="email" name="email" placeholder="email">
+            </div>
+
+            <div class="Form__Input">
+                <input type="password" name="password" placeholder="password">
+            </div>
+
+            <div class="Form__Submit">
+                <input type="submit" placeholder="Submit">
+            </div>
+        </form>
+    </main>
+
+</body>
+
+</html>
