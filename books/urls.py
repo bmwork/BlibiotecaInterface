@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     # Book
-    path('', views.browsePage.as_view(), name="browse"),
+    path('browse', views.browsePage.as_view(), name="browse"),
     path('visualize/<str:slug>', views.visualizeBookPage, name="visualize"),
     path('buy/<str:slug>', views.buyBookPage, name="buy"),
 
@@ -16,7 +16,7 @@ urlpatterns = [
     path('adm/browse/add', views.bookAddPage, name="add"),
     path('adm/browse/edit/<str:slug>', views.bookEditPage, name="edit"),
     path('adm/browse/del/<str:slug>', views.bookDelPage, name="delete"),
-    
+
     # path('adm/browse/add', views.browseAdminPage, name="browseAdmin"),
     # path('adm/browse/edit', views.browseAdminPage, name="browseAdmin"),
 
