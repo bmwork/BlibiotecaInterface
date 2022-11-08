@@ -10,6 +10,7 @@ urlpatterns = [
     path('register', views.registerUser, name="register"),
     path('logout', views.logoutUser, name="logout"),
     path('inventory', views.inventoryPage, name="inventory"),
+    path('wishlist', views.wishlist, name="wishlist"),
     path('inventory/read/<str:slug>', views.readPage, name="read"),
     path('inventory/rate/<str:slug>', views.ratePage, name="rate"),
 ]

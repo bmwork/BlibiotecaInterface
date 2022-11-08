@@ -1,4 +1,6 @@
 from .models import Book
+import uuid
+
 
 def get_by_uuid(query, uuid):
     for book in query:
@@ -7,3 +9,10 @@ def get_by_uuid(query, uuid):
         except Book.DoesNotExist:
             pass
     return None
+
+
+def strToUUID(list):
+    converted = []
+    for value in list:
+        converted.append(uuid.UUID(value).hex)
+    return converted

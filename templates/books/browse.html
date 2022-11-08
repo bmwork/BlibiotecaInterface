@@ -23,7 +23,7 @@
             <ul>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'inventory' %}">Inventory</a></li>
-                <!-- <li><a href="#">Settings</a></li> -->
+                <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 <img src="{{ profile_pic.url }}" alt="">
                 {% endif %}
@@ -39,10 +39,6 @@
 
                     <div class="Book__Cover">
                         <img src="{{ book.cover.url }}">
-                    </div>
-
-                    <div class="Book__Title">
-                        {{ book.title }}
                     </div>
 
                 </a>

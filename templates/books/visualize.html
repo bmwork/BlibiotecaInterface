@@ -22,9 +22,11 @@
         </div>
         <nav class="Header__Navbar">
             <ul>
-                <li><a href="{% url 'inventory' %}">Inventory</a></li>
                 {% if user.is_authenticated %}
+                <li><a href="{% url 'browse' %}">Browse</a></li>
+                <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                <img src="{{ profile_pic.url }}" alt="">
                 {% endif %}
             </ul>
         </nav>
@@ -47,6 +49,7 @@
                 <div class="Form__Submit">
                     <a href="{% url 'browse' %}">Back</a>
                     <a href="{% url 'buy' book_uuid %}">Buy</a>
+                    <a href="{% url 'favorite' book_uuid %}">Favorite</a>
                 </div>
 
             </div>

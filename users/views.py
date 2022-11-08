@@ -24,7 +24,7 @@ def loginUser(request):
         except Customer.DoesNotExist:
             messages.warning(request, "Email not registered")
             return redirect('login')
-        
+
         user = authenticate(request, username=username, password=password)
 
         # If the user authentication is succeded, login the user
@@ -40,6 +40,7 @@ def loginUser(request):
             return redirect('login')
 
     return render(request, 'auth/login.html')
+
 
 def registerUser(request):
 
@@ -74,7 +75,7 @@ def registerUser(request):
         if Customer.objects.filter(email=email).exists():
             messages.warning(request, "Email already registered")
             return redirect('register')
-        
+
         else:
 
             # Creating the user model to save in the database
@@ -94,8 +95,27 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+
 def inventoryPage(request):
     return render(request, 'users/inventory.html')
+
+
+def wishlist(request):
+    user_wl = request.user.wishlist
+    user_wl = eval(user_wl)
+    reg_books = Book.objects.all()
+    # wh = strToUUID(wishlist2)
+    # print(wh)
+    empty_list = []
+
+    for uuid in user_wl:
+        casted_uuid = get_by_uuid(reg_books, uuid)
+        empty_list.append(casted_uuid)
+    ctx = {"wishlist": empty_list}
+
+    print(ctx)
+
+    return render(request, 'users/wishlist.html', ctx)
 
 
 def readPage(request, slug):
@@ -111,6 +131,7 @@ def readPage(request, slug):
 
     return render(request, 'users/read.html', ctx)
 
+
 def ratePage(request, slug):
     owned_books_query = request.user.inventory.all()
     book = get_by_uuid(owned_books_query, slug)
@@ -121,5 +142,3 @@ def ratePage(request, slug):
     }
 
     return render(request, 'users/rate.html', ctx)
-
-
