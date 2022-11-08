@@ -22,10 +22,15 @@
     </header>
 
     <main class="Container">
-        <form class="Form" action="" method="POST" autocomplete="off">
+        <form class="Form" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
 
             <h1 class="Form__Title">Register</h1>
+
+            <div class="Form__Input">
+                <input type="file" accept="image/*" name="picture" placeholder="Image">
+            </div>
+
 
             <div class="Form__Input">
                 <input type="text" name="username" placeholder="username">

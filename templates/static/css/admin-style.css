@@ -12,6 +12,7 @@ body {
     display: flex;
     width: 100%;
     margin: 0;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .Header__Title {
@@ -22,7 +23,14 @@ body {
 
 .Header__Navbar {
     margin-left: auto;
-    padding: 1rem;
+    padding: 0.5rem;
+}
+
+.Header__Navbar img {
+    width: 2.3rem;
+    height: 1.5rem;
+    border: 1px solid whitesmoke;
+    margin: 0.2rem;
 }
 
 .Header__Navbar ul {
@@ -36,7 +44,7 @@ body {
 }
 
 .Header__Navbar ul li a {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     text-decoration: none;
     color: #fff
 }
@@ -62,17 +70,26 @@ body {
 }
 
 .Book__Cover img {
-    width: 250px;
+    width: 128px;
+    height: 200px;
     border: 0.2rem solid rgb(39, 39, 39);
-    border-radius: 11px;
+    box-shadow: -5px -3px 7px #141414, 1px 1px 4px rgba(146, 146, 146, 0.945);
 }
 
-.Book__Cover img:hover {
-    background-color: aliceblue;
-}
 
 .Book__Title {
     font-size: 1.2rem;
     text-align: center;
     color: #fff;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Book__Title a {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #fff;
+    margin: 0.2rem;
+    padding: 0.10rem;
+    border: 0.25rem solid rgb(39, 39, 39);
 }

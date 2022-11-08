@@ -51,7 +51,12 @@ def registerUser(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
+        if request.FILES:
+            picture = request.FILES['picture']
 
+        if not request.FILES:
+            messages.warning(request, "Image Cannot be empty")
+            return redirect('register')
         # Filters the username to be unique
 
         if Customer.objects.filter(username=username).exists():
@@ -76,6 +81,7 @@ def registerUser(request):
             # Along with a profile
 
             user = Customer(username=username, email=email)
+            user.picture = picture
             user.set_password(password1)
             user.save()
 
@@ -95,7 +101,6 @@ def inventoryPage(request):
 def readPage(request, slug):
     owned_books_query = request.user.inventory.all()
     book = get_by_uuid(owned_books_query, slug)
-    print(book.title)
 
     ctx = {
         'book_cover': book.cover.url,
@@ -105,5 +110,16 @@ def readPage(request, slug):
     }
 
     return render(request, 'users/read.html', ctx)
+
+def ratePage(request, slug):
+    owned_books_query = request.user.inventory.all()
+    book = get_by_uuid(owned_books_query, slug)
+
+    ctx = {
+        'book_cover': book.cover.url,
+        'book_title': book.title,
+    }
+
+    return render(request, 'users/rate.html', ctx)
 
 

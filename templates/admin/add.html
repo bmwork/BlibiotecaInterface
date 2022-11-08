@@ -33,7 +33,7 @@
 
     <main class="Container">
 
-        <form class="Form" action="" method="POST" autocomplete="off">
+        <form class="Form" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
 
             <h1 class="Form__Title">Add Book</h1>
@@ -44,6 +44,16 @@
                 </div>
                 <div class="FieldContainer__InputContainer">
                     <input class="InputContainer__Input" type="text" name="title" value="{{ book_title }}">
+                </div>
+            </div>
+
+            <div class="Form__FieldContainer">
+                <div class="FieldContainer__LabelContainer">
+                    <a class="LabelContainer__Label">Cover:</a>
+                </div>
+                <div class="FieldContainer__InputContainer">
+                    <input class="InputContainer__Input" type="file" accept="image/*" name="cover"
+                        value="{{ book_cover }}">
                 </div>
             </div>
 

@@ -18,11 +18,14 @@
         <div class="Header__Title">
             Library {{ request.session.name }}
         </div>
+
         <nav class="Header__Navbar">
             <ul>
-                <li><a href="{% url 'inventory' %}">Inventory</a></li>
                 {% if user.is_authenticated %}
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <!-- <li><a href="#">Settings</a></li> -->
                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                <img src="{{ profile_pic.url }}" alt="">
                 {% endif %}
             </ul>
         </nav>

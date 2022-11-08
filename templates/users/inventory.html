@@ -32,15 +32,15 @@
         <div class="Container">
             {% for book in owned_books %}
             <div class="Container__Book">
-                <a href="{% url 'read' book.uuid %}">
 
-                    <div class="Book__Cover">
-                        <img src="{{ book.cover.url }}">
-                    </div>
+                <div class="Book__Cover">
+                    <img src="{{ book.cover.url }}">
+                </div>
 
-                    <div class="Book__Title">
-                        {{ book.title }}
-                    </div>
+                <div class="Book__Title">
+                    <a href="{% url 'read' book.uuid %}">Read</a>
+                    <a href="{% url 'rate' book.uuid %}">Rate</a>
+                </div>
 
                 </a>
             </div>

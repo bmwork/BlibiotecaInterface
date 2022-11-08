@@ -3,7 +3,7 @@ from django.db import models
 import uuid
 
 class Book (models.Model):
-    cover = models.ImageField(default='bookcovers/book.ico', blank=True, null=True)
+    cover = models.ImageField(default='default_book.ico', upload_to="bookcovers/", blank=True, null=True)
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     content = models.CharField(max_length=10000) 

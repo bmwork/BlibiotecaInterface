@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout', views.logoutUser, name="logout"),
     path('inventory', views.inventoryPage, name="inventory"),
     path('inventory/read/<str:slug>', views.readPage, name="read"),
+    path('inventory/rate/<str:slug>', views.ratePage, name="rate"),
 ]

@@ -58,11 +58,13 @@ def bookEditPage(request, slug):
 
     if request.method == "POST":
         title = request.POST.get('title')
+        cover = request.FILES['cover']
         desc = request.POST.get('desc')
         cont = request.POST.get('cont')
         qnt = request.POST.get('qnt')
         
         book.title = title
+        book.cover = cover
         book.description = desc
         book.content = cont
         book.quantity = qnt
@@ -83,9 +85,14 @@ def bookAddPage(request):
         title = request.POST.get('title')
         desc = request.POST.get('desc')
         cont = request.POST.get('cont')
-
-        book = Book.objects.create(title=title, description=desc, content=cont)
-        book.save()
+        if request.FILES:
+            cover = request.FILES['cover']
+            book = Book.objects.create(title=title, description=desc, content=cont, cover=cover)
+            book.save()
+            return redirect('browseAdmin')
+        else:
+            book = Book.objects.create(title=title, description=desc, content=cont)
+            book.save()
         return redirect('browseAdmin')
     return render(request, 'admin/add.html')
 
