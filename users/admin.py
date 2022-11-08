@@ -4,7 +4,7 @@ from . import models
 class CustomerAdmin(admin.ModelAdmin):
     fieldsets = (
     ('User Information', {
-        'fields': ['username', 'email', 'password']
+        'fields': ['username', 'email', 'password', 'wishlist']
     }),
 
     ('Inventory', {

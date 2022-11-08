@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
-from books.functions import get_by_uuid
+from books.functions import get_by_uuid, strToUUID
 from books.models import Book
 
 
@@ -90,6 +90,24 @@ def logoutUser(request):
 
 def inventoryPage(request):
     return render(request, 'users/inventory.html')
+
+def wishlist(request):
+    wishlist2 = request.user.wishlist
+    wishlist2 = eval(wishlist2)
+    wishlist3 = Book.objects.all() 
+    # wh = strToUUID(wishlist2)
+    # print(wh)
+    lista_vazia = []
+    
+    for index ,uuid in enumerate(wishlist2):
+        l = get_by_uuid(wishlist3, wishlist2)
+        lista_vazia.append(l)
+    ctx = { "wishlist": lista_vazia}
+
+    print(ctx)
+        
+    
+    return render(request, 'users/wishlist.html', ctx)
 
 
 def readPage(request, slug):
