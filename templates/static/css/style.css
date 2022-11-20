@@ -186,23 +186,67 @@ main {
 .BrowseContainer {
     margin-top: 5rem;
     display: flex;
-    flex-flow: row wrap;
-    width: 70%;
+    flex-wrap: wrap;
+    position: fixed;
+    width: 65%;
+    height: 90vh;
     background-color: var(--bg-primary);
 }
 
 .BrowseContainer__Book {
-    margin: 1rem;
+    margin: 2rem;
+    padding-left: 3rem;
     display: inline-block;
 }
+
+.BrowseContainer__SearchBar-Wrapper {
+    position: absolute;
+    margin-top: 1rem;
+    color: white;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 6%;
+    white-space: unset;
+}
+
+.BrowseContainer__SearchBar {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+}
+
+.BrowseContainer__SearchBar input {
+    font-size: 1.5rem;
+    background-color: #1f1f29;
+    color: white;
+    width: 100%;
+}
+
+.BrowseContainer__SearchBar-Btn input {
+    height: 100%;
+    cursor: pointer;
+    background-color: var(--bg-primary);
+}
+
+.BrowseContainer__SearchBar-Btn input:hover {
+    height: 100%;
+    cursor: pointer;
+    transition: var(--transition-speed);
+    background-color: var(--bg-secondary);
+    color: var(--color-theme);
+}
+
 
 .BrowseContainer__Book a {
     text-decoration: none;
 }
 
 .BrowseContainer__Book-Cover img {
-    width: 128px;
-    height: 200px;
+    width: 8rem;
+    height: 13rem;
     border: 0.2rem solid rgb(39, 39, 39);
     box-shadow: -5px -3px 7px #141414, 1px 1px 4px rgba(146, 146, 146, 0.945);
 }
@@ -239,6 +283,39 @@ main {
 .BrowseContainer__Book-Button a:hover {
     color: #3753a1;
 }
+
+.BrowseContainer__Paginator {
+    margin-left: auto;
+    margin-top: auto;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.BrowseContainer__Paginator-Button {
+    padding: 1.2rem;
+    background-color: var(--bg-primary);
+    border: 0.1rem solid #1f1f29;
+    text-decoration: none;
+    color: white;
+}
+
+.BrowseContainer__Paginator-Button:hover {
+    transition: var(--transition-speed);
+    background-color: var(--bg-secondary);
+    color: var(--color-theme);
+}
+
+.disabled,
+.disabled:hover {
+    background-color: #1f1f29;
+    border: 0.1rem solid var(--bg-primary);
+}
+
+
 
 /* Visualize Books */
 

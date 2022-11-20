@@ -8,6 +8,7 @@ from . import views
 urlpatterns = [
     # Book
     path('browse', views.browsePage.as_view(), name="browse"),
+    path('result', views.searchBook, name="search"),
     path('books/<str:slug>', views.visualizeBookPage, name="visualize"),
     path('borrow/<str:slug>', views.borrowBook, name="borrow"),
     path('favorite/<str:slug>', views.favoriteBookPage, name="favorite"),
@@ -18,8 +19,4 @@ urlpatterns = [
     path('adm/browse/add', views.bookAddPage, name="adminAdd"),
     path('adm/browse/edit/<str:slug>', views.bookEditPage, name="adminEdit"),
     path('adm/browse/del/<str:slug>', views.bookDelPage, name="adminDelete"),
-
-    # path('adm/browse/add', views.browseAdminPage, name="browseAdmin"),
-    # path('adm/browse/edit', views.browseAdminPage, name="browseAdmin"),
-
 ]

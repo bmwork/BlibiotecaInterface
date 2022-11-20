@@ -15,13 +15,24 @@ from django.http import HttpResponse
 class browsePage(ListView):
     model = Book
     template_name = 'books/browse.html'
+    paginate_by = 10
     context_object_name = 'books'
 
 
 class browseAdminPage(ListView):
     model = Book
     template_name = 'admin/Adminbrowse.html'
+    paginate_by = 10
     context_object_name = 'books'
+
+
+def searchBook(request):
+    if request.method == "GET":
+        search = request.GET.get('search')
+        results = Book.objects.all().filter(title=search)
+        ctx = {'results': results}
+
+        return render(request, 'books/search.html', ctx)
 
 
 def visualizeBookPage(request, slug):

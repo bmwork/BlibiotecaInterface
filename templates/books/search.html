@@ -15,7 +15,7 @@
     </form>
 
     <div class="BrowseContainer">
-        {% for book in books %}
+        {% for book in results %}
         <div class="BrowseContainer__Book">
             <a href="{% url 'visualize' book.uuid %}">
 
@@ -94,5 +94,6 @@
     </div>
 
 </main>
+
 
 {% endblock %}

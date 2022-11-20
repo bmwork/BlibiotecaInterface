@@ -5,6 +5,15 @@
 {% block content %}
 
 <main>
+    <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
+        <div class="BrowseContainer__SearchBar">
+            <input type="text" name="search" placeholder="Search...">
+            <div class="BrowseContainer__SearchBar-Btn">
+                <input type="submit" placeholder="Submit">
+            </div>
+        </div>
+    </form>
+
     <div class="BrowseContainer">
         {% for book in books %}
         <div class="BrowseContainer__Book">
@@ -22,6 +31,67 @@
 
         </div>
         {% endfor %}
+
+        <div class="BrowseContainer__Paginator">
+            {% if page_obj.has_previous %}
+            <a href="?page=1" class="BrowseContainer__Paginator-Button">
+                <div>
+                    &lt;&lt;
+                </div>
+            </a>
+
+            <a href="?page={{ page_obj.previous_page_number }}" class="BrowseContainer__Paginator-Button">
+                <div>
+                    {{ page_obj.previous_page_number }}
+                </div>
+            </a>
+            {% else %}
+            <a href="" class="BrowseContainer__Paginator-Button disabled">
+                <div>
+                    &lt;&lt;
+                </div>
+            </a>
+
+            <a href="" class="BrowseContainer__Paginator-Button disabled">
+                <div>
+                </div>
+            </a>
+            {% endif %}
+
+            <a href="" class="BrowseContainer__Paginator-Button">
+                <div>
+                    ...
+                </div>
+            </a>
+
+            {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}" class="BrowseContainer__Paginator-Button">
+                <div>
+                    {{ page_obj.next_page_number }}
+                </div>
+            </a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="BrowseContainer__Paginator-Button">
+                <div>
+                    &gt;&gt;
+                </div>
+            </a>
+            {% else %}
+
+            <a href="" class="BrowseContainer__Paginator-Button disabled">
+                <div>
+                </div>
+            </a>
+
+            <a href="" class="BrowseContainer__Paginator-Button disabled">
+                <div>
+                    &gt;&gt;
+                </div>
+            </a>
+
+            {% endif %}
+        </div>
     </div>
     </div>
 </main>
