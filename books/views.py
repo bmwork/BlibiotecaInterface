@@ -8,6 +8,8 @@ from .functions import get_by_uuid
 import json
 from django.apps import apps
 from users.models import Customer
+from books.models import Review
+from django.http import HttpResponse
 
 
 class browsePage(ListView):
@@ -18,33 +20,34 @@ class browsePage(ListView):
 
 class browseAdminPage(ListView):
     model = Book
-    template_name = 'admin/browseAdmin.html'
+    template_name = 'admin/Adminbrowse.html'
     context_object_name = 'books'
 
 
 def visualizeBookPage(request, slug):
-    books_query = Book.objects.all()
-    book = get_by_uuid(books_query, slug)
+    book = Book.objects.get(uuid=slug)
+    ctx = {'book': book}
 
-    ctx = {
-        'book_cover': book.cover.url,
-        'book_title': book.title,
-        'book_desc': book.description,
-        'book_qnt': book.quantity,
-        'book_uuid': book.uuid,
-    }
+    if request.method == "POST":
+        name = request.user.username
+        comment = request.POST.get('comment')
+
+        if comment:
+            review = Review.objects.create(
+                book=book, name=name, body=comment)
+            review.save()
 
     return render(request, 'books/visualize.html', ctx)
 
 
-def buyBookPage(request, slug):
-    books_query = Book.objects.all()
-    book = get_by_uuid(books_query, slug)
+def borrowBook(request, slug):
+    if request.user.is_authenticated:
+        book = Book.objects.get(uuid=slug)
+        request.user.inventory.add(book)
+        request.user.save()
+        return redirect('inventory')
 
-    request.user.inventory.add(book)
-    request.user.save()
-
-    return redirect('browse')
+    return redirect('visualize', slug)
 
 
 def remove_from_favorite_book_page(request, slug):
@@ -102,58 +105,59 @@ def favoriteBookPage(request, slug):
 
 
 def bookEditPage(request, slug):
-    books_query = Book.objects.all()
-    book = get_by_uuid(books_query, slug)
-
-    ctx = {
-        'book_cover': book.cover.url,
-        'book_title': book.title,
-        'book_desc': book.description,
-        'book_cont': book.content,
-        'book_qnt': book.quantity,
-        'book_uuid': book.uuid,
-    }
+    book = Book.objects.get(uuid=slug)
+    ctx = {'book': book}
 
     if request.method == "POST":
         title = request.POST.get('title')
-        cover = request.FILES['cover']
-        desc = request.POST.get('desc')
-        cont = request.POST.get('cont')
-        qnt = request.POST.get('qnt')
+        author = request.POST.get('author')
+        date_published = request.POST.get('date_published')
+        publisher = request.POST.get('publisher')
+        language = request.POST.get('language')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
+
+        if request.FILES:
+            cover = request.FILES['cover']
+            book.cover = cover
 
         book.title = title
-        book.cover = cover
-        book.description = desc
-        book.content = cont
-        book.quantity = qnt
+        book.author = author
+        book.date_published = date_published
+        book.publisher = publisher
+        book.language = language
+        book.description = description
+        book.content = content
         book.save()
-        return redirect('browseAdmin')
+        return redirect('adminEdit', slug)
 
-    return render(request, 'admin/edit.html', ctx)
+    return render(request, 'admin/adminEdit.html', ctx)
 
 
 def bookDelPage(request, slug):
-    books_query = Book.objects.all()
-    book = get_by_uuid(books_query, slug)
+    book = Book.objects.get(uuid=slug)
     book.delete()
-    return redirect('browseAdmin')
+    return redirect('adminBrowse')
 
 
 def bookAddPage(request):
-
     if request.method == "POST":
         title = request.POST.get('title')
-        desc = request.POST.get('desc')
-        cont = request.POST.get('cont')
+        author = request.POST.get('author')
+        date_published = request.POST.get('date_published')
+        publisher = request.POST.get('publisher')
+        language = request.POST.get('language')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
+
         if request.FILES:
             cover = request.FILES['cover']
-            book = Book.objects.create(
-                title=title, description=desc, content=cont, cover=cover)
+            book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
+                                       publisher=publisher, language=language, description=description, content=content)
             book.save()
-            return redirect('browseAdmin')
+            return redirect('adminBrowse')
+
         else:
-            book = Book.objects.create(
-                title=title, description=desc, content=cont)
-            book.save()
-        return redirect('browseAdmin')
-    return render(request, 'admin/add.html')
+            return redirect('adminAdd')
+
+    return render(request, 'admin/adminAdd.html')

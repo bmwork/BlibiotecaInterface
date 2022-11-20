@@ -1,46 +1,27 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block title %} Browsing {% endblock%}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static '/css/login-style.css' %}">
-    <title>Library Interface</title>
-</head>
+<main>
+    <form class="LoginForm" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
 
-<body>
-    <header class="Header">
-        <div class="Header__Title">Library</div>
-        <nav class="Header__Navbar">
-            <ul>
-                <li><a href="{% url 'register' %}">Register</a></li>
-            </ul>
-        </nav>
-    </header>
+        <h1 class="LoginForm__Title">Login</h1>
 
-    <main class="Container">
-        <form class="Form" action="" method="POST" autocomplete="off">
-            {% csrf_token %}
+        <div class="LoginForm__Field">
+            <input type="email" name="email" placeholder="email">
+        </div>
 
-            <h1 class="Form__Title">Login</h1>
+        <div class="LoginForm__Field">
+            <input type="password" name="password" placeholder="password">
+        </div>
 
-            <div class="Form__Input">
-                <input type="email" name="email" placeholder="email">
-            </div>
+        <div class="LoginForm__Field-Submit">
+            <input type="submit" placeholder="Submit">
+        </div>
+    </form>
+</main>
 
-            <div class="Form__Input">
-                <input type="password" name="password" placeholder="password">
-            </div>
-
-            <div class="Form__Submit">
-                <input type="submit" placeholder="Submit">
-            </div>
-        </form>
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

@@ -8,16 +8,16 @@ from . import views
 urlpatterns = [
     # Book
     path('browse', views.browsePage.as_view(), name="browse"),
-    path('visualize/<str:slug>', views.visualizeBookPage, name="visualize"),
-    path('buy/<str:slug>', views.buyBookPage, name="buy"),
+    path('books/<str:slug>', views.visualizeBookPage, name="visualize"),
+    path('borrow/<str:slug>', views.borrowBook, name="borrow"),
     path('favorite/<str:slug>', views.favoriteBookPage, name="favorite"),
     path('remove/<str:slug>', views.remove_from_favorite_book_page, name="remove"),
 
     # Admin
-    path('adm/browse', views.browseAdminPage.as_view(), name="browseAdmin"),
-    path('adm/browse/add', views.bookAddPage, name="add"),
-    path('adm/browse/edit/<str:slug>', views.bookEditPage, name="edit"),
-    path('adm/browse/del/<str:slug>', views.bookDelPage, name="delete"),
+    path('adm/browse', views.browseAdminPage.as_view(), name="adminBrowse"),
+    path('adm/browse/add', views.bookAddPage, name="adminAdd"),
+    path('adm/browse/edit/<str:slug>', views.bookEditPage, name="adminEdit"),
+    path('adm/browse/del/<str:slug>', views.bookDelPage, name="adminDelete"),
 
     # path('adm/browse/add', views.browseAdminPage, name="browseAdmin"),
     # path('adm/browse/edit', views.browseAdminPage, name="browseAdmin"),

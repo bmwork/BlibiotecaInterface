@@ -113,21 +113,13 @@ def wishlist(request):
         empty_list.append(casted_uuid)
     ctx = {"wishlist": empty_list}
 
-    print(ctx)
-
     return render(request, 'users/wishlist.html', ctx)
 
 
 def readPage(request, slug):
     owned_books_query = request.user.inventory.all()
     book = get_by_uuid(owned_books_query, slug)
-
-    ctx = {
-        'book_cover': book.cover.url,
-        'book_title': book.title,
-        'book_desc': book.description,
-        'book_cont': book.content,
-    }
+    ctx = {'book': book}
 
     return render(request, 'users/read.html', ctx)
 
@@ -135,10 +127,6 @@ def readPage(request, slug):
 def ratePage(request, slug):
     owned_books_query = request.user.inventory.all()
     book = get_by_uuid(owned_books_query, slug)
-
-    ctx = {
-        'book_cover': book.cover.url,
-        'book_title': book.title,
-    }
+    ctx = {'book': book}
 
     return render(request, 'users/rate.html', ctx)
