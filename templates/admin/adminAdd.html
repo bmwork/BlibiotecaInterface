@@ -12,9 +12,36 @@
                 <img src="{{ book.cover.url }}">
             </div>
 
-            <a class="AdminForm__Book-Link" href="#">
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input type="file" accept="image/*" name="cover" id="cover" value="{{ book.cover }}">
+                    <label for="cover">
+                        Change Cover
+                    </label>
+                </div>
+            </a>
+
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input name="pdf" id="pdf" type="file" accept="application/pdf" value="{{ book.pdf_file }}">
+                    <label for="pdf">
+                        PDF
+                    </label>
+                </div>
+            </a>
+
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input name="mp3" id="mp3" type="file" accept="audio/mpeg" value="{{ book.mp3_file }}">
+                    <label for="mp3">
+                        MP3
+                    </label>
+                </div>
+            </a>
+
+            <a class="AdminForm__Button-Submit">
                 <div class="AdminForm__Book-Button">
-                    <input type="file" accept="image/*" name="cover" value="{{ book.cover }}">
+                    <input type="number" name="amount" placeholder="Book Amount">
                 </div>
             </a>
 
@@ -23,6 +50,7 @@
                     <input type="submit" value="Add">
                 </div>
             </a>
+
 
             <a class="AdminForm__Book-Link" href="{% url 'adminBrowse' %}">
                 <div class="AdminForm__Book-Button">

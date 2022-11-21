@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Account Detail {% endblock%}
+
+{% block content %}
+<main>
+
+    <form class="AccountContainer" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="AccountContainer__Detail">
+            <div class="AccountContainer__Detail-Pic">
+                <img src="{{ request.user.picture.url }}">
+            </div>
+
+
+            <a class="AccountContainer__Detail-Link">
+                <div id="AccountName" class="AccountContainer__Detail-Button">
+                    {{ request.user.username }}
+                </div>
+            </a>
+
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input type="file" accept="image/*" name="picture" id="picture">
+                    <label for="picture">
+                        Change picture
+                    </label>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="AccountContainer__Detail-Wrapper">
+            <div class="AccountContainer__Detail-Title">
+                Personal Info
+            </div>
+
+            <div class="AccountContainer__Detail-Field">
+                <div class="AccountContainer__Detail-Label">
+                    Username
+                </div>
+
+                <div class="AccountContainer__Detail-Input">
+                    <input type="text" name="username" value="{{ request.user.username }}">
+                </div>
+            </div>
+
+            <div class="AccountContainer__Detail-Field">
+                <div class="AccountContainer__Detail-Label">
+                    Email
+                </div>
+
+                <div class="AccountContainer__Detail-Input">
+                    <input type="email" name="email" value="{{ request.user.email }}">
+                </div>
+            </div>
+
+            <div class="AccountContainer__Detail-Field">
+                <div class="AccountContainer__Detail-Label">
+                    Password
+                </div>
+
+                <div class="AccountContainer__Detail-Input">
+                    <input type="password" name="password" value="*******...">
+                </div>
+            </div>
+
+            <div class="AccountContainer__Detail-Submit">
+
+                <div>
+                    <input type="submit" value="Update">
+                </div>
+            </div>
+
+
+        </div>
+
+    </form>
+
+    </div>
+    </div>
+</main>
+
+{% endblock %}

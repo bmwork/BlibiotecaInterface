@@ -21,8 +21,8 @@
 
                 <div>
                     <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Read</a>
-                    <a class="InventoryContainer__Book-Button" href="#">Audio</a>
-                    <a class="InventoryContainer__Book-Button" href="#">PDF</a>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
                     <a class="InventoryContainer__Book-Button" href="#">Return</a>
                 </div>
 

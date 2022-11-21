@@ -12,11 +12,27 @@
                 <img src="{{ book.cover.url }}">
             </div>
 
-            <a class="AdminForm__Book-Link" href="#">
+            <a class="AdminForm__Book-Link" href="">
                 <div class="AdminForm__Book-Button">
+                    Cover:
                     <input type="file" accept="image/*" name="cover" value="{{ book.cover }}">
                 </div>
             </a>
+
+            <a class="AdminForm__Book-Link" href="">
+                <div class="AdminForm__Book-Button">
+                    PDF:
+                    <input name="pdf" type="file" accept="application/pdf" value="{{ book.pdf_file }}">
+                </div>
+            </a>
+
+            <a class="AdminForm__Book-Link" href="">
+                <div class="AdminForm__Book-Button">
+                    MP3:
+                    <input name="mp3" type="file" accept="audio/mpeg" value="{{ book.mp3_file }}">
+                </div>
+            </a>
+
 
             <a class="AdminForm__Button-Submit" href="#">
                 <div class="AdminForm__Book-Button">

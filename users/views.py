@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
 from books.functions import get_by_uuid
@@ -124,9 +123,23 @@ def readPage(request, slug):
     return render(request, 'users/read.html', ctx)
 
 
-def ratePage(request, slug):
-    owned_books_query = request.user.inventory.all()
-    book = get_by_uuid(owned_books_query, slug)
-    ctx = {'book': book}
+def accountPage(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        picture = request.FILES.get('picture')
 
-    return render(request, 'users/rate.html', ctx)
+        if not picture:
+            return redirect('account')
+
+        request.user.picture = picture
+        request.user.username = username
+        request.user.email = email
+        request.user.set_password(password)
+        request.user.save()
+
+        logout(request)
+        return redirect('login')
+
+    return render(request, 'users/account.html')

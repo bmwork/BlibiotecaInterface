@@ -1,52 +1,37 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block title %} Wishlist {% endblock%}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static '/css/admin-style.css' %}">
-    <title>Library Interface</title>
-</head>
+<main>
+    <div class="InventoryContainer">
+        <h1 class="InventoryContainer__Title">Your Wishlist</h1>
+        {% for book in wishlist %}
 
-{% if user.is_authenticated %}
+        <div class="InventoryContainer__Book">
+            <a href="{% url 'visualize' book.uuid %}">
+                <div class="InventoryContainer__Book-Cover">
+                    <img src="{{ book.cover.url }}">
+                </div>
+            </a>
 
-<body>
-    <header class="Header">
-        <div class="Header__Title">
-            Library {{ request.session.name }}
-        </div>
-        <nav class="Header__Navbar">
-            <ul>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'browse' %}">Browse</a></li>
-                <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                <img src="{{ profile_pic.url }}" alt="">
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+            <div class="InventoryContainer__Book-Info">
+                {{ book.title }} Expires in 10 days
 
-    <main class="Container">
-        <div class="Container">
-            {% for book in wishlist %}
-            <div class="Container__Book">
-                <a href="{% url 'visualize' book.uuid %}">
-                    <div class="Book__Cover">
-                        <img src="{{ book.cover.url }}">
-                    </div>
+                <div>
+                    <!-- <a class="InventoryContainer__Book-Button" href="{% url 'visualize' book.uuid %}">Page</a> -->
+                    <a class="InventoryContainer__Book-Button" href="{% url 'borrow' book.uuid %}">Borrow</a>
+                    <a class="InventoryContainer__Book-Button" href="#">Remove</a>
+                </div>
 
-                </a>
             </div>
-            {% endfor %}
-        </div>
-        </div>
-    </main>
-</body>
 
-{% endif %}
+        </div>
 
-</html>
+        {% endfor %}
+    </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,12 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from django.contrib import messages
 from .models import Book
-from .functions import get_by_uuid
 import json
-from django.apps import apps
 from users.models import Customer
 from books.models import Review
 from django.http import HttpResponse
@@ -33,6 +29,20 @@ def searchBook(request):
         ctx = {'results': results}
 
         return render(request, 'books/search.html', ctx)
+
+
+def viewPDF(request, slug):
+    book = Book.objects.get(uuid=slug)
+
+    response = HttpResponse(book.pdf_file, content_type="application/pdf")
+    return response
+
+
+def viewMP3(request, slug):
+    book = Book.objects.get(uuid=slug)
+
+    response = HttpResponse(book.mp3_file, content_type="audio/mpeg")
+    return response
 
 
 def visualizeBookPage(request, slug):
@@ -128,9 +138,16 @@ def bookEditPage(request, slug):
         description = request.POST.get('description')
         content = request.POST.get('content')
 
-        if request.FILES:
-            cover = request.FILES['cover']
-            book.cover = cover
+        cover = request.FILES.get('cover')
+        pdf = request.FILES.get('pdf')
+        mp3 = request.FILES.get('mp3')
+
+        if not cover or not pdf or not mp3:
+            return redirect('adminEdit', slug)
+
+        book.cover = cover
+        book.pdf_file = pdf
+        book.mp3_file = mp3
 
         book.title = title
         book.author = author
@@ -140,7 +157,7 @@ def bookEditPage(request, slug):
         book.description = description
         book.content = content
         book.save()
-        return redirect('adminEdit', slug)
+        return redirect('adminBrowse')
 
     return render(request, 'admin/adminEdit.html', ctx)
 
@@ -161,14 +178,24 @@ def bookAddPage(request):
         description = request.POST.get('description')
         content = request.POST.get('content')
 
-        if request.FILES:
-            cover = request.FILES['cover']
-            book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
-                                       publisher=publisher, language=language, description=description, content=content)
-            book.save()
+        cover = request.FILES.get('cover')
+        pdf = request.FILES.get('pdf')
+        mp3 = request.FILES.get('mp3')
+
+        if not cover or not pdf or not mp3:
+            return redirect('adminAdd')
+
+        amount = request.POST.get('amount')
+        if amount:
+            for x in range(int(amount)):
+                book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
+                                           publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
+                book.save()
             return redirect('adminBrowse')
 
-        else:
-            return redirect('adminAdd')
+        book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
+                                   publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
+        book.save()
+        return redirect('adminBrowse')
 
     return render(request, 'admin/adminAdd.html')

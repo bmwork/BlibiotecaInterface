@@ -5,16 +5,17 @@
 {% block content %}
 
 <main>
-    <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
-        <div class="BrowseContainer__SearchBar">
-            <input type="text" name="search" placeholder="Search...">
-            <div class="BrowseContainer__SearchBar-Btn">
-                <input type="submit" placeholder="Submit">
-            </div>
-        </div>
-    </form>
 
     <div class="BrowseContainer">
+        <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
+            <div class="BrowseContainer__SearchBar">
+                <input type="text" name="search" placeholder="Search...">
+                <div class="BrowseContainer__SearchBar-Btn">
+                    <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
+                    <input type="submit" id="submit" value="">
+                </div>
+            </div>
+        </form>
         {% for book in books %}
         <div class="BrowseContainer__Book">
             <a href="{% url 'visualize' book.uuid %}">
@@ -27,6 +28,10 @@
 
             <div class="BrowseContainer__Book-Button">
                 <a href="{% url 'adminEdit' book.uuid %}">Edit</a>
+            </div>
+
+            <div class="BrowseContainer__Book-Button">
+                <a href="{% url 'adminDelete' book.uuid %}">Delete</a>
             </div>
 
         </div>

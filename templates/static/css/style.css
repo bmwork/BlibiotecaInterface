@@ -82,13 +82,13 @@ body::-webkit-scrollbar-thumb {
     margin-left: 1rem;
 }
 
-.Nav__Link svg {
+.Nav__Link i {
     min-width: 2rem;
     margin: 0 1.5rem;
 }
 
-.svg-color {
-    fill: var(--color-theme);
+.fa-solid {
+    color: var(--color-theme);
     transition: var(--transition-speed);
 }
 
@@ -103,13 +103,13 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
 }
 
-.Nav__Logo svg {
+.Nav__Logo i {
     fill: whitesmoke;
     transform: rotate(0deg);
     transition: transform var(--transition-speed);
 }
 
-.Navbar:hover .Nav__Logo svg {
+.Navbar:hover .Nav__Logo i {
     transform: rotate(180deg);
     fill: var(--color-theme);
 }
@@ -200,7 +200,6 @@ main {
 }
 
 .BrowseContainer__SearchBar-Wrapper {
-    position: absolute;
     margin-top: 1rem;
     color: white;
     text-align: center;
@@ -225,20 +224,31 @@ main {
     width: 100%;
 }
 
-.BrowseContainer__SearchBar-Btn input {
-    height: 100%;
-    cursor: pointer;
-    background-color: var(--bg-primary);
+.BrowseContainer__SearchBar-Btn {
+    display: flex;
+
 }
 
-.BrowseContainer__SearchBar-Btn input:hover {
-    height: 100%;
-    cursor: pointer;
-    transition: var(--transition-speed);
+.BrowseContainer__SearchBar-Btn i {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0.75rem;
     background-color: var(--bg-secondary);
+    filter: grayscale(0%) opacity(1);
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.BrowseContainer__SearchBar-Btn i:hover {
+    transition: var(--transition-speed);
     color: var(--color-theme);
 }
 
+.BrowseContainer__SearchBar-Btn input {
+    background-color: transparent;
+    border: none;
+}
 
 .BrowseContainer__Book a {
     text-decoration: none;
@@ -759,4 +769,121 @@ main {
     color: var(--color-theme);
     transition: var(--transition-speed);
     background-color: var(--bg-secondary);
+}
+
+/* Account Details */
+
+.AccountContainer {
+    margin-top: 5rem;
+    display: flex;
+    width: 70%;
+    background-color: var(--bg-primary);
+    color: rgb(216, 216, 216);
+}
+
+.AccountContainer__Detail-Pic {
+    display: flex;
+    width: 250px;
+    height: 300px;
+    justify-content: center;
+    border: 0.2rem solid var(--bg-secondary);
+}
+
+
+
+.AccountContainer__Detail-Pic img {
+    margin-top: 0.8rem;
+    width: 12rem;
+    height: 17rem;
+
+}
+
+.AccountContainer__Detail-Pic img:hover {
+    transform-style: preserve-3d;
+    animation: rotate 0.5s;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes rotate {
+    100% {
+        transform: perspective(1000px) rotateY(15deg);
+    }
+}
+
+
+.AccountContainer__Detail-Wrapper {
+    margin: 2rem;
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.AccountContainer__Detail-Title {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.AccountContainer__Detail-Field {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.AccountContainer__Detail-Label {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.AccountContainer__Detail-Input input {
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.1rem solid var(--color-theme);
+    color: var(--text-secondary);
+}
+
+
+.AccountContainer__Detail-Button {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+#AccountName {
+    background-color: var(--bg-secondary);
+}
+
+.AccountContainer__Detail-Link {
+    text-decoration: none;
+    color: white;
+}
+
+.AccountContainer__Detail-Button:hover {
+    color: var(--color-theme);
+    transition: var(--transition-speed);
+    background-color: var(--bg-secondary);
+}
+
+.AccountContainer__Detail-Submit div input {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.AccountContainer__Detail-Submit div input:hover {
+    transition: var(--transition-speed);
+    color: var(--color-theme);
+}
+
+.AccountContainer__Detail-Button input[type="file"] {
+    display: none;
 }

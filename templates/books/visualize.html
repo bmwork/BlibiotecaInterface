@@ -17,7 +17,7 @@
                 </div>
             </a>
 
-            <a class="VisualizeContainer__Book-Link" href="">
+            <a class="VisualizeContainer__Book-Link" href="{% url 'favorite' book.uuid%}">
                 <div class="VisualizeContainer__Book-Button">
                     Add to Wishlist
                 </div>
@@ -32,20 +32,20 @@
             </div>
 
             <div class="VisualizeContainer__Book-Author">
-                by Author
+                by {{ book.author }}
             </div>
 
             <div class="VisualizeContainer__Book-Details">
                 <div>
-                    Published: 10/11/2022
+                    Published: {{ book.date_published }}
                 </div>
 
                 <div>
-                    Publisher: Someone Random
+                    Publisher: {{ book.publisher }}
                 </div>
 
                 <div>
-                    Languague: English
+                    Languague: {{ book.language }}
                 </div>
             </div>
 

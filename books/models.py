@@ -4,7 +4,7 @@ import uuid
 
 class Book (models.Model):
     cover = models.ImageField(
-        default='default_book.ico', upload_to="bookcovers/", blank=True, null=True)
+        default="default_book.png", upload_to="bookcovers/", blank=True, null=True)
     title = models.CharField(max_length=100, null=True)
     author = models.CharField(max_length=100, null=True)
     date_published = models.CharField(max_length=20, null=True)
@@ -12,6 +12,8 @@ class Book (models.Model):
     language = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=100, null=True)
     content = models.TextField(max_length=50000, null=True)
+    pdf_file = models.FileField(upload_to="pdf_files/", null=True, blank=True)
+    mp3_file = models.FileField(upload_to="mp3_files/", null=True, blank=True)
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
 
     def __str__(self) -> str:
