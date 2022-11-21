@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'books'
+    'books',
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [ BASE_DIR / "templates/static" ]
+STATICFILES_DIRS = [BASE_DIR / "templates/static"]
 
 MEDIA_ROOT = Path(BASE_DIR, 'media')
 MEDIA_CONFS = Path(BASE_DIR, 'media', 'configs')
@@ -136,3 +137,4 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.Customer"
+TAGGIT_CASE_INSENSITIVE = True

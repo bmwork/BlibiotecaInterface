@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from taggit.managers import TaggableManager
 
 
 class Book (models.Model):
@@ -14,7 +15,15 @@ class Book (models.Model):
     content = models.TextField(max_length=50000, null=True)
     pdf_file = models.FileField(upload_to="pdf_files/", null=True, blank=True)
     mp3_file = models.FileField(upload_to="mp3_files/", null=True, blank=True)
+
+    one_star = models.IntegerField(default=0, null=True, blank=True)
+    two_star = models.IntegerField(default=0, null=True, blank=True)
+    three_star = models.IntegerField(default=0, null=True, blank=True)
+    four_star = models.IntegerField(default=0, null=True, blank=True)
+    five_star = models.IntegerField(default=0, null=True, blank=True)
+
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    tags = TaggableManager()
 
     def __str__(self) -> str:
         return self.title

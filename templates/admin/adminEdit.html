@@ -12,29 +12,35 @@
                 <img src="{{ book.cover.url }}">
             </div>
 
-            <a class="AdminForm__Book-Link" href="">
-                <div class="AdminForm__Book-Button">
-                    Cover:
-                    <input type="file" accept="image/*" name="cover" value="{{ book.cover }}">
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input type="file" accept="image/*" name="cover" id="cover" value="{{ book.cover }}">
+                    <label for="cover">
+                        Change Cover
+                    </label>
                 </div>
             </a>
 
-            <a class="AdminForm__Book-Link" href="">
-                <div class="AdminForm__Book-Button">
-                    PDF:
-                    <input name="pdf" type="file" accept="application/pdf" value="{{ book.pdf_file }}">
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input name="pdf" id="pdf" type="file" accept="application/pdf" value="{{ book.pdf_file }}">
+                    <label for="pdf">
+                        PDF
+                    </label>
                 </div>
             </a>
 
-            <a class="AdminForm__Book-Link" href="">
-                <div class="AdminForm__Book-Button">
-                    MP3:
-                    <input name="mp3" type="file" accept="audio/mpeg" value="{{ book.mp3_file }}">
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input name="mp3" id="mp3" type="file" accept="audio/mpeg" value="{{ book.mp3_file }}">
+                    <label for="mp3">
+                        MP3
+                    </label>
                 </div>
             </a>
 
 
-            <a class="AdminForm__Button-Submit" href="#">
+            <a class="AdminForm__Button-Submit">
                 <div class="AdminForm__Book-Button">
                     <input type="submit" value="Edit">
                 </div>
@@ -84,6 +90,16 @@
 
             <div class="AdminForm__Book-Desc">
                 Content: <textarea name="content">{{ book.content }}</textarea>
+            </div>
+
+            <div class="AdminForm__Book-Details">
+                <div>
+                    Tags: <input type="text" name="tags" value="{{ tag }}">
+                    {% for tag in book.tags.all %}
+                    {{ tag }}
+                    {% endfor %}
+                    *Separate by comma*
+                </div>
             </div>
 
         </div>

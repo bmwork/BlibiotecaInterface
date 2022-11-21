@@ -17,11 +17,38 @@
                 </div>
             </a>
 
-            <a class="VisualizeContainer__Book-Link" href="{% url 'favorite' book.uuid%}">
+            <a class="VisualizeContainer__Book-Link" href="{% url 'favorite' book.uuid %}">
                 <div class="VisualizeContainer__Book-Button">
                     Add to Wishlist
                 </div>
             </a>
+
+            <form action="" method="post" class="VisualizeContainer__Book-Rate">
+                {% csrf_token %}
+                <input type="radio" id="star-1" name="rate" value="1"><label for="star-1"
+                    class="fa-solid fa-star"></label>
+
+                <input type="radio" id="star-2" name="rate" value="2"><label for="star-2"
+                    class="fa-solid fa-star"></label>
+
+                <input type="radio" id="star-3" name="rate" value="3"><label for="star-3"
+                    class="fa-solid fa-star"></label>
+
+                <input type="radio" id="star-4" name="rate" value="4"><label for="star-4"
+                    class="fa-solid fa-star"></label>
+
+                <input type="radio" id="star-5" name="rate" value="5"><label for="star-5"
+                    class="fa-solid fa-star"></label>
+
+                <div class="Submit-review">
+                    <input type="submit" value="Review">
+                </div>
+
+            </form>
+
+            <div class="VisualizeContainer__Book-Button">
+                {{ rating }} of 5.0
+            </div>
 
 
         </div>
@@ -53,6 +80,17 @@
                 {{ book.description }}
             </div>
 
+            <div class="VisualizeContainer__Book-TagsWrapper">
+                <div class="VisualizeContainer__Book-Tags">
+                    Tags:
+                </div>
+                {% for tag in book.tags.all %}
+                <div class="VisualizeContainer__Book-Tags">
+                    {{ tag }}
+                </div>
+                {% endfor %}
+            </div>
+
             {% if user.is_authenticated %}
             <form class="VisualizeContainer__ReviewForm" action="" method="post">
                 {% csrf_token %}
@@ -61,7 +99,7 @@
                 </div>
 
                 <div class="VisualizeContainer__ReviewForm-Submit">
-                    <input type="submit" placeholder="Submit">
+                    <input type="submit" value="Review">
                 </div>
             </form>
             {% endif %}
@@ -74,11 +112,11 @@
                 <h1>No Reviews</h1>
 
                 {% else %}
-                <h1>Reviews</h1>
+                <h1>Reviews ({{ book.reviews.count }})</h1>
                 {% for review in book.reviews.all %}
                 <div class="VisualizeContainer__Reviews">
                     <div class="VisualizeContainer__Reviews-Image">
-                        <img src="/media/profiles/smoil.jpg" alt="">
+                        <img src="{{ request.user.picture.url }}" alt="">
                     </div>
 
                     <div class="VisualizeContainer__Reviews__Wrapper">
@@ -105,5 +143,7 @@
     </div>
     </div>
 </main>
+
+<script defer src="{% static 'js/rate.js'%}"></script>
 
 {% endblock %}

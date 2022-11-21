@@ -25,9 +25,12 @@ class browseAdminPage(ListView):
 def searchBook(request):
     if request.method == "GET":
         search = request.GET.get('search')
-        results = Book.objects.all().filter(title=search)
-        ctx = {'results': results}
+        search = search.split(' ')
+        results_title = Book.objects.all().filter(title=search)
+        results_tags = Book.objects.all().filter(tags__name__in=search)
+        matches = results_title | results_tags
 
+        ctx = {'matches': matches}
         return render(request, 'books/search.html', ctx)
 
 
@@ -47,11 +50,48 @@ def viewMP3(request, slug):
 
 def visualizeBookPage(request, slug):
     book = Book.objects.get(uuid=slug)
-    ctx = {'book': book}
+
+    total_ratings = book.one_star + book.two_star + \
+        book.three_star + book.four_star + book.five_star
+
+    one_star_ratings = book.one_star * 1
+    two_star_ratings = book.two_star * 2
+    three_star_ratings = book.three_star * 3
+    four_star_ratings = book.four_star * 4
+    five_star_ratings = book.five_star * 5
+
+    total_stars = one_star_ratings + two_star_ratings + \
+        three_star_ratings + four_star_ratings + five_star_ratings
+
+    average_rating = total_stars/total_ratings
+    average_rating = round(average_rating, 2)
+
+    ctx = {'book': book, 'rating': average_rating}
+
+    print(average_rating)
 
     if request.method == "POST":
         name = request.user.username
         comment = request.POST.get('comment')
+        rating = request.POST.get('rate')
+
+        if rating:
+            rating = int(rating)
+            if rating == 1:
+                book.one_star += 1
+                book.save()
+            if rating == 2:
+                book.two_star += 1
+                book.save()
+            if rating == 3:
+                book.three_star += 1
+                book.save()
+            if rating == 4:
+                book.four_star += 1
+                book.save()
+            if rating == 5:
+                book.five_star += 1
+                book.save()
 
         if comment:
             review = Review.objects.create(
@@ -142,12 +182,22 @@ def bookEditPage(request, slug):
         pdf = request.FILES.get('pdf')
         mp3 = request.FILES.get('mp3')
 
+        tags = request.POST.get('tags')
+        tags = tags.split(",")
+
         if not cover or not pdf or not mp3:
             return redirect('adminEdit', slug)
 
         book.cover = cover
         book.pdf_file = pdf
         book.mp3_file = mp3
+
+        all_tags = book.tags.all()
+        for tag in all_tags:
+            tag.delete()
+
+        for tag in tags:
+            book.tags.add(tag)
 
         book.title = title
         book.author = author
@@ -182,6 +232,9 @@ def bookAddPage(request):
         pdf = request.FILES.get('pdf')
         mp3 = request.FILES.get('mp3')
 
+        tags = request.POST.get('tags')
+        tags = tags.split(",")
+
         if not cover or not pdf or not mp3:
             return redirect('adminAdd')
 
@@ -190,11 +243,17 @@ def bookAddPage(request):
             for x in range(int(amount)):
                 book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
                                            publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
+                for tag in tags:
+                    book.tags.add(tag)
                 book.save()
             return redirect('adminBrowse')
 
         book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
                                    publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
+
+        for tag in tags:
+            book.tags.add(tag)
+
         book.save()
         return redirect('adminBrowse')
 

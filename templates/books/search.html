@@ -5,17 +5,18 @@
 {% block content %}
 
 <main>
-    <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
-        <div class="BrowseContainer__SearchBar">
-            <input type="text" name="search" placeholder="Search...">
-            <div class="BrowseContainer__SearchBar-Btn">
-                <input type="submit" placeholder="Submit">
-            </div>
-        </div>
-    </form>
 
     <div class="BrowseContainer">
-        {% for book in results %}
+        <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
+            <div class="BrowseContainer__SearchBar">
+                <input type="text" name="search" placeholder="Search...">
+                <div class="BrowseContainer__SearchBar-Btn">
+                    <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
+                    <input type="submit" id="submit" value="">
+                </div>
+            </div>
+        </form>
+        {% for book in matches %}
         <div class="BrowseContainer__Book">
             <a href="{% url 'visualize' book.uuid %}">
 
