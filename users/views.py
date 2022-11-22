@@ -103,14 +103,14 @@ def wishlist(request):
     user_wl = request.user.wishlist
     user_wl = eval(user_wl)
     reg_books = Book.objects.all()
-    # wh = strToUUID(wishlist2)
-    # print(wh)
-    empty_list = []
+    wl_books = []
 
     for uuid in user_wl:
         casted_uuid = get_by_uuid(reg_books, uuid)
-        empty_list.append(casted_uuid)
-    ctx = {"wishlist": empty_list}
+        wl_books.append(casted_uuid)
+
+    ctx = {"wishlist": wl_books}
+    print(wl_books, "AAAAAAAAAAAAAAAAAAAAAAAA")
 
     return render(request, 'users/wishlist.html', ctx)
 

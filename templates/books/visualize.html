@@ -46,9 +46,15 @@
 
             </form>
 
+            {% if rating %}
             <div class="VisualizeContainer__Book-Button">
                 {{ rating }} of 5.0
             </div>
+            {% else %}
+            <div class="VisualizeContainer__Book-Button">
+                0 of 5.0
+            </div>
+            {% endif %}
 
 
         </div>
@@ -77,7 +83,7 @@
             </div>
 
             <div class="VisualizeContainer__Book-Desc">
-                {{ book.description }}
+                <textarea rows="10" cols="30" disabled>{{ book.description }}</textarea>
             </div>
 
             <div class="VisualizeContainer__Book-TagsWrapper">

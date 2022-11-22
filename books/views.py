@@ -26,9 +26,10 @@ def searchBook(request):
     if request.method == "GET":
         search = request.GET.get('search')
         search = search.split(' ')
-        results_title = Book.objects.all().filter(title=search)
+        results_title = Book.objects.all().filter(title__in=search)
+        results_author = Book.objects.all().filter(author__in=search)
         results_tags = Book.objects.all().filter(tags__name__in=search)
-        matches = results_title | results_tags
+        matches = results_title | results_author | results_tags
 
         ctx = {'matches': matches}
         return render(request, 'books/search.html', ctx)
@@ -50,25 +51,25 @@ def viewMP3(request, slug):
 
 def visualizeBookPage(request, slug):
     book = Book.objects.get(uuid=slug)
+    ctx = {'book': book}
 
     total_ratings = book.one_star + book.two_star + \
         book.three_star + book.four_star + book.five_star
 
-    one_star_ratings = book.one_star * 1
-    two_star_ratings = book.two_star * 2
-    three_star_ratings = book.three_star * 3
-    four_star_ratings = book.four_star * 4
-    five_star_ratings = book.five_star * 5
+    if total_ratings:
 
-    total_stars = one_star_ratings + two_star_ratings + \
-        three_star_ratings + four_star_ratings + five_star_ratings
+        one_star_ratings = book.one_star * 1
+        two_star_ratings = book.two_star * 2
+        three_star_ratings = book.three_star * 3
+        four_star_ratings = book.four_star * 4
+        five_star_ratings = book.five_star * 5
 
-    average_rating = total_stars/total_ratings
-    average_rating = round(average_rating, 2)
+        total_stars = one_star_ratings + two_star_ratings + \
+            three_star_ratings + four_star_ratings + five_star_ratings
 
-    ctx = {'book': book, 'rating': average_rating}
-
-    print(average_rating)
+        average_rating = total_stars/total_ratings
+        average_rating = round(average_rating, 2)
+        ctx['rating'] = average_rating
 
     if request.method == "POST":
         name = request.user.username

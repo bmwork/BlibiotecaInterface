@@ -3,7 +3,6 @@ def load_books(request):
         books = request.user.inventory.all()
         wishlist = request.user.wishlist
 
-        return {"owned_books": books,
-                "wishlist": wishlist}
+        return {"owned_books": books}
 
     return {"owned_books": []}

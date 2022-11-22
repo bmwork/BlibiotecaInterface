@@ -183,13 +183,78 @@ main {
     justify-content: center;
 }
 
+/* Footer */
+
+footer {
+    width: 100%;
+    bottom: 0;
+    border-top: 0.2rem solid var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+.FooterWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.FooterWrapper__Title {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 1rem;
+}
+
+.FooterWrapper p {
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.FooterWrapper__Links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.FooterWrapper__Links li {
+    margin: 0 0.6rem;
+}
+
+.FooterWrapper__Links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+}
+
+.FooterWrapper__Links a:hover i {
+    transition: var(--transition-speed);
+    color: var(--color-theme);
+}
+
+.FooterWrapper__Links a i {
+    font-size: 0.7rem;
+}
+
+.FooterBottom {
+    background-color: #131318;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.FooterBottom p {
+    text-transform: capitalize;
+    word-spacing: 0.2rem;
+}
+
+
 .BrowseContainer {
     margin-top: 5rem;
     display: flex;
     flex-wrap: wrap;
-    position: fixed;
     width: 65%;
-    height: 90vh;
+    height: 75vh;
     background-color: var(--bg-primary);
 }
 
@@ -204,11 +269,10 @@ main {
     color: white;
     text-align: center;
     width: 100%;
+    height: 3.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 6%;
-    white-space: unset;
 }
 
 .BrowseContainer__SearchBar {
@@ -327,7 +391,7 @@ main {
 
 
 
-/* Visualize Books */
+/* Visualize Books Styling */
 
 .VisualizeContainer {
     margin-top: 5rem;
@@ -339,8 +403,8 @@ main {
 
 .VisualizeContainer__Book-Cover {
     display: flex;
-    width: 250px;
-    height: 300px;
+    height: 20rem;
+    margin: 1rem;
     justify-content: center;
 }
 
@@ -392,13 +456,15 @@ main {
     width: 100%;
 }
 
-.VisualizeContainer__Book-Desc {
+.VisualizeContainer__Book-Desc textarea {
     margin-top: 4rem;
     font-size: 1.6rem;
-    max-height: 25rem;
-    overflow-y: scroll;
     background-color: #1f1f29;
+    width: 100%;
+    resize: none;
+    color: white;
 }
+
 
 .VisualizeContainer__Book-TagsWrapper {
     display: flex;
@@ -426,25 +492,6 @@ main {
     transition: var(--transition-speed);
 }
 
-.VisualizeContainer__Book-Desc::-webkit-scrollbar-track {
-    border: 1px solid #000;
-    padding: 2px 0;
-    background-color: var(--bg-secondary)
-}
-
-.VisualizeContainer__Book-Desc::-webkit-scrollbar {
-    width: 10px;
-}
-
-.VisualizeContainer__Book-Desc::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    background-color: var(--text-primary);
-}
-
-.VisualizeContainer__Book-Desc::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-theme);
-
-}
 
 .VisualizeContainer__Book-Button {
     font-size: 1.6rem;
@@ -578,7 +625,8 @@ main {
     margin-top: 5rem;
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
+    height: 75vh;
     background-color: var(--bg-primary);
     color: rgb(216, 216, 216);
 }
@@ -696,15 +744,10 @@ main {
 
 .AdminForm__Book-Cover {
     display: flex;
-    width: 18rem;
     height: 20rem;
     justify-content: center;
 }
 
-.AdminForm__Book-Cover:hover {
-    transition: var(--transition-speed);
-    background-color: var(--bg-secondary);
-}
 
 .AdminForm__Book-Cover img {
     margin-top: 0.8rem;
@@ -844,6 +887,7 @@ main {
     margin-top: 5rem;
     display: flex;
     width: 70%;
+    height: 75vh;
     background-color: var(--bg-primary);
     color: rgb(216, 216, 216);
 }
