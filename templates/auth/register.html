@@ -5,14 +5,10 @@
 {% block content %}
 
 <main>
-    <form class="RegisterForm" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <form class="RegisterForm" action="" method="POST" autocomplete="off">
         {% csrf_token %}
 
         <h1 class="LoginForm__Title">Register</h1>
-
-        <div class="LoginForm__Field">
-            <input type="file" accept="image/*" name="picture" placeholder="Image">
-        </div>
 
         <div class="LoginForm__Field">
             <input type="text" name="username" placeholder="username">

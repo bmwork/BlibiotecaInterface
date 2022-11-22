@@ -17,10 +17,10 @@
             </a>
 
             <div class="InventoryContainer__Book-Info">
-                {{ book.title }} Expires in 10 days
+                {{ book.title }}
 
                 <div>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Read</a>
+                    <a class="InventoryContainer__Book-Button" href="">Read</a>
                     <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
                     <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
                     <a class="InventoryContainer__Book-Button" href="#">Return</a>

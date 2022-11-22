@@ -5,35 +5,32 @@
 {% block content %}
 
 <main>
-    <main>
-        <div class="InventoryContainer">
-            <h1 class="InventoryContainer__Title">Your Books</h1>
-            {% for book in wishlist %}
+    <div class="InventoryContainer">
+        <h1 class="InventoryContainer__Title">Your Wishlist</h1>
+        {% for book in wishlist %}
 
-            <div class="InventoryContainer__Book">
-                <a href="{% url 'visualize' book.uuid %}">
-                    <div class="InventoryContainer__Book-Cover">
-                        <img src="{{ book.cover.url }}">
-                    </div>
-                </a>
+        <div class="InventoryContainer__Book">
+            <a href="{% url 'visualize' book.uuid %}">
+                <div class="InventoryContainer__Book-Cover">
+                    <img src="{{ book.cover.url }}">
+                </div>
+            </a>
 
-                <div class="InventoryContainer__Book-Info">
-                    {{ book.title }} Expires in 10 days
+            <div class="InventoryContainer__Book-Info">
+                {{ book.title }}
 
-                    <div>
-                        <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Read</a>
-                        <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
-                        <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
-                        <a class="InventoryContainer__Book-Button" href="#">Return</a>
-                    </div>
-
+                <div>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'borrow' book.uuid %}">Borrow</a>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'visualize' book.uuid %}">Page</a>
                 </div>
 
             </div>
 
-            {% endfor %}
         </div>
-        </div>
-    </main>
 
-    {% endblock %}
+        {% endfor %}
+    </div>
+    </div>
+</main>
+
+{% endblock %}

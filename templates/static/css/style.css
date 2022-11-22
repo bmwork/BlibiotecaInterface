@@ -683,7 +683,7 @@ footer {
     background-color: var(--bg-primary);
     color: rgb(216, 216, 216);
     text-align: center;
-    height: 22rem;
+    margin-bottom: 16.5rem;
 }
 
 .LoginForm__Title {
@@ -729,7 +729,7 @@ footer {
     background-color: var(--bg-primary);
     color: rgb(216, 216, 216);
     text-align: center;
-    height: 32rem;
+    margin-bottom: 8.8rem;
 }
 
 /* Admin */
@@ -997,4 +997,12 @@ footer {
 
 .AccountContainer__Detail-Button input[type="file"] {
     display: none;
+}
+
+.SearchContainer {
+    margin-top: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 65%;
+    background-color: var(--bg-primary);
 }

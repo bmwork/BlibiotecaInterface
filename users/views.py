@@ -51,12 +51,6 @@ def registerUser(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        if request.FILES:
-            picture = request.FILES['picture']
-
-        if not request.FILES:
-            messages.warning(request, "Image Cannot be empty")
-            return redirect('register')
         # Filters the username to be unique
 
         if Customer.objects.filter(username=username).exists():
@@ -81,7 +75,6 @@ def registerUser(request):
             # Along with a profile
 
             user = Customer(username=username, email=email)
-            user.picture = picture
             user.set_password(password1)
             user.save()
 
