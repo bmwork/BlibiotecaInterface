@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Results {% endblock%}
+{% block title %} Resultado {% endblock%}
 
 {% block content %}
 
@@ -9,14 +9,15 @@
     <div class="SearchContainer">
         <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
             <div class="BrowseContainer__SearchBar">
-                <input type="text" name="search" placeholder="Search...">
+                <input type="text" name="search" placeholder="Buscar...">
                 <div class="BrowseContainer__SearchBar-Btn">
                     <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
                     <input type="submit" id="submit" value="">
                 </div>
             </div>
         </form>
-        {% for book in matches %}
+        {% if page_obj %}
+        {% for book in page_obj %}
         <div class="BrowseContainer__Book">
             <a href="{% url 'visualize' book.uuid %}">
 
@@ -26,10 +27,13 @@
 
             </a>
             <div class="BrowseContainer__Book-Button">
-                <a href="{% url 'borrow' book.uuid %}">Borrow</a>
+                <a href="{% url 'borrow' book.uuid %}">Emprestar</a>
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <!-- <h1 class="SearchContainer__Title">Nenhum Resultado</h1> -->
+        {% endif %}
 
         <div class="BrowseContainer__Paginator">
             {% if page_obj.has_previous %}

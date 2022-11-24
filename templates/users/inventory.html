@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Inventory {% endblock%}
+{% block title %} Inventario {% endblock%}
 
 {% block content %}
 
 <main>
     <div class="InventoryContainer">
-        <h1 class="InventoryContainer__Title">Your Books</h1>
+        <h1 class="InventoryContainer__Title">Seus Livros</h1>
         {% for book in owned_books %}
 
         <div class="InventoryContainer__Book">
@@ -20,10 +20,10 @@
                 {{ book.title }}
 
                 <div>
-                    <a class="InventoryContainer__Book-Button" href="">Read</a>
+                    <!-- <a class="InventoryContainer__Book-Button" href="">Ler</a> -->
                     <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
                     <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
-                    <a class="InventoryContainer__Book-Button" href="#">Return</a>
+                    <!-- <a class="InventoryContainer__Book-Button" href="#">Retornar</a> -->
                 </div>
 
             </div>

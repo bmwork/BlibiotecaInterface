@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Browsing {% endblock%}
+{% block title %} Explorar {% endblock%}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
     <div class="BrowseContainer">
         <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
             <div class="BrowseContainer__SearchBar">
-                <input type="text" name="search" placeholder="Search...">
+                <input type="text" name="search" placeholder="Buscar...">
                 <div class="BrowseContainer__SearchBar-Btn">
                     <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
                     <input type="submit" id="submit" value="">
@@ -26,7 +26,7 @@
 
             </a>
             <div class="BrowseContainer__Book-Button">
-                <a href="{% url 'borrow' book.uuid %}">Borrow</a>
+                <a href="{% url 'borrow' book.uuid %}">Emprestar</a>
             </div>
         </div>
         {% endfor %}

@@ -13,13 +13,13 @@
 
             <a class="VisualizeContainer__Book-Link" href="{% url 'borrow' book.uuid%}">
                 <div class="VisualizeContainer__Book-Button">
-                    Borrow
+                    Emprestar
                 </div>
             </a>
 
             <a class="VisualizeContainer__Book-Link" href="{% url 'favorite' book.uuid %}">
                 <div class="VisualizeContainer__Book-Button">
-                    Add to Wishlist
+                    Adicionar aos favoritos
                 </div>
             </a>
 
@@ -41,18 +41,18 @@
                     class="fa-solid fa-star"></label>
 
                 <div class="Submit-review">
-                    <input type="submit" value="Review">
+                    <input type="submit" value="Avaliar">
                 </div>
 
             </form>
 
             {% if rating %}
             <div class="VisualizeContainer__Book-Button">
-                {{ rating }} of 5.0
+                {{ rating }} de 5.0
             </div>
             {% else %}
             <div class="VisualizeContainer__Book-Button">
-                0 of 5.0
+                0 de 5.0
             </div>
             {% endif %}
 
@@ -65,20 +65,20 @@
             </div>
 
             <div class="VisualizeContainer__Book-Author">
-                by {{ book.author }}
+                por {{ book.author }}
             </div>
 
             <div class="VisualizeContainer__Book-Details">
                 <div>
-                    Published: {{ book.date_published }}
+                    Data publicado: {{ book.date_published }}
                 </div>
 
                 <div>
-                    Publisher: {{ book.publisher }}
+                    Editora: {{ book.publisher }}
                 </div>
 
                 <div>
-                    Languague: {{ book.language }}
+                    Lingua: {{ book.language }}
                 </div>
             </div>
 
@@ -101,11 +101,11 @@
             <form class="VisualizeContainer__ReviewForm" action="" method="post">
                 {% csrf_token %}
                 <div class="VisualizeContainer__ReviewForm-Field">
-                    <textarea placeholder="Make a Review..." name="comment"></textarea>
+                    <textarea placeholder="Faca um comentario..." name="comment"></textarea>
                 </div>
 
                 <div class="VisualizeContainer__ReviewForm-Submit">
-                    <input type="submit" value="Review">
+                    <input type="submit" value="Comentar">
                 </div>
             </form>
             {% endif %}
@@ -115,10 +115,10 @@
             <div class="VisualizeContainer__ReviewsWrapper">
                 {% if not book.reviews.all %}
 
-                <h1>No Reviews</h1>
+                <h1>Sem comentarios</h1>
 
                 {% else %}
-                <h1>Reviews ({{ book.reviews.count }})</h1>
+                <h1>Comentarios ({{ book.reviews.count }})</h1>
                 {% for review in book.reviews.all %}
                 <div class="VisualizeContainer__Reviews">
                     <div class="VisualizeContainer__Reviews-Image">

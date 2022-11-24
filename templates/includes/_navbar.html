@@ -5,7 +5,7 @@
 
         <li class="Nav__Logo ">
             <a class="Nav__Link">
-                <span class="Link__Text">Library Interface</span>
+                <span class="Link__Text">Biblioteca Interface</span>
                 <i class="fa-solid fa-bookmark fa-2x"></i>
             </a>
         </li>
@@ -13,28 +13,28 @@
         <li class="Nav__Item">
             <a href="{% url 'account' %}" class="Nav__Link">
                 <i class="fa-solid fa-user fa-2x"></i>
-                <span class="Link__Text">Account Details {{ request.session.username }}</span>
+                <span class="Link__Text">Detalhes da Conta {{ request.session.username }}</span>
             </a>
         </li>
 
         <li class="Nav__Item">
             <a href="{% url 'inventory' %}" class="Nav__Link">
                 <i class="fa-solid fa-book fa-2x"></i>
-                <span class="Link__Text">Inventory</span>
+                <span class="Link__Text">Inventario</span>
             </a>
         </li>
 
         <li class="Nav__Item">
             <a href="{% url 'browse' %}" class="Nav__Link">
                 <i class="fa-solid fa-bag-shopping fa-2x"></i>
-                <span class="Link__Text">Browse</span>
+                <span class="Link__Text">Explorar</span>
             </a>
         </li>
 
         <li class="Nav__Item">
             <a href="{% url 'wishlist' %}" class="Nav__Link">
                 <i class="fa-solid fa-star fa-2x"></i>
-                <span class="Link__Text">Wishlist</span>
+                <span class="Link__Text">Favoritos</span>
             </a>
         </li>
 
@@ -42,7 +42,7 @@
         <li class="Nav__Item">
             <a href="{% url 'adminBrowse' %}" class="Nav__Link">
                 <i class="fa-solid fa-screwdriver-wrench fa-2x"></i>
-                <span class="Link__Text">Admin View</span>
+                <span class="Link__Text">Administrar</span>
             </a>
         </li>
         {% endif %}
@@ -50,7 +50,7 @@
         <li class="Nav__Item">
             <a href="{% url 'logout' %}" class="Nav__Link">
                 <i class="fa-solid fa-right-from-bracket fa-2x"></i>
-                <span class="Link__Text">Sign Out</span>
+                <span class="Link__Text">Sair</span>
             </a>
         </li>
     </ul>
@@ -63,7 +63,7 @@
 
         <li class="Nav__Logo ">
             <a class="Nav__Link">
-                <span class="Link__Text">Library Interface</span>
+                <span class="Link__Text">Biblioteca Interface</span>
                 <i class="fa-solid fa-bookmark fa-2x"></i>
             </a>
         </li>
@@ -71,7 +71,7 @@
         <li class="Nav__Item">
             <a href="{% url 'login' %}" class="Nav__Link">
                 <i class="fa-solid fa-forward fa-2x"></i>
-                <span class="Link__Text">Sign in</span>
+                <span class="Link__Text">Entrar</span>
             </a>
         </li>
 
@@ -79,21 +79,21 @@
         <li class="Nav__Item">
             <a href="{% url 'browse' %}" class="Nav__Link">
                 <i class="fa-solid fa-bag-shopping fa-2x"></i>
-                <span class="Link__Text">Browse</span>
+                <span class="Link__Text">Explorar</span>
             </a>
         </li>
 
         <li class="Nav__Item">
             <a href="" class="Nav__Link">
                 <i class="fa-solid fa-question fa-2x"></i>
-                <span class="Link__Text">Forgot Password</span>
+                <span class="Link__Text">Esqueci a senha</span>
             </a>
         </li>
 
         <li class="Nav__Item">
             <a href="{% url 'register' %}" class="Nav__Link">
                 <i class="fa-solid fa-address-card fa-2x"></i>
-                <span class="Link__Text">Register</span>
+                <span class="Link__Text">Cadastro</span>
             </a>
         </li>
     </ul>

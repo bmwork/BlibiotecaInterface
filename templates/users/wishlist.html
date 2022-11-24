@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Wishlist {% endblock%}
+{% block title %} Favoritos {% endblock%}
 
 {% block content %}
 
 <main>
     <div class="InventoryContainer">
-        <h1 class="InventoryContainer__Title">Your Wishlist</h1>
+        <h1 class="InventoryContainer__Title">Seus favoritos</h1>
         {% for book in wishlist %}
 
         <div class="InventoryContainer__Book">
@@ -20,8 +20,8 @@
                 {{ book.title }}
 
                 <div>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'borrow' book.uuid %}">Borrow</a>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'visualize' book.uuid %}">Page</a>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'borrow' book.uuid %}">Emprestar</a>
+                    <a class="InventoryContainer__Book-Button" href="{% url 'visualize' book.uuid %}">Ver</a>
                 </div>
 
             </div>

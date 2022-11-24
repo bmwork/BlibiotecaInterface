@@ -9,7 +9,7 @@
     <div class="BrowseContainer">
         <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
             <div class="BrowseContainer__SearchBar">
-                <input type="text" name="search" placeholder="Search...">
+                <input type="text" name="search" placeholder="Buscar...">
                 <div class="BrowseContainer__SearchBar-Btn">
                     <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
                     <input type="submit" id="submit" value="">
@@ -27,8 +27,8 @@
             </a>
 
             <div class="BrowseContainer__Book-Button">
-                <a href="{% url 'adminEdit' book.uuid %}">Edit</a>
-                <a href="{% url 'adminDelete' book.uuid %}">Delete</a>
+                <a href="{% url 'adminEdit' book.uuid %}">Editar</a>
+                <a href="{% url 'adminDelete' book.uuid %}">Del</a>
             </div>
 
 

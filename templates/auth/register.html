@@ -1,33 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Register {% endblock%}
+{% block title %} Cadastro {% endblock%}
 
 {% block content %}
 
 <main>
-    <form class="RegisterForm" action="" method="POST" autocomplete="off">
+    <form class="Register" action="" method="POST" autocomplete="off">
         {% csrf_token %}
 
-        <h1 class="LoginForm__Title">Register</h1>
+        <h1 class="Login__Title">Cadastro</h1>
 
-        <div class="LoginForm__Field">
-            <input type="text" name="username" placeholder="username">
+        <div class="Login__Field">
+            <input type="text" name="username" placeholder="usuario">
         </div>
 
-        <div class="LoginForm__Field">
+        <div class="Login__Field">
             <input type="email" name="email" placeholder="email">
         </div>
 
-        <div class="LoginForm__Field">
-            <input type="password" name="password1" placeholder="password">
+        <div class="Login__Field">
+            <input type="password" name="password1" placeholder="senha">
         </div>
 
-        <div class="LoginForm__Field">
-            <input type="password" name="password2" placeholder="confirm password">
+        <div class="Login__Field">
+            <input type="password" name="password2" placeholder="confirmar senha">
         </div>
 
-        <div class="LoginForm__Field-Submit">
-            <input type="submit" placeholder="Submit">
+        <div class="Login__Field-Submit">
+            <input type="submit" value="Enviar">
         </div>
     </form>
 

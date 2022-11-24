@@ -6,7 +6,8 @@ import json
 from users.models import Customer
 from books.models import Review
 from django.http import HttpResponse
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
+from gtts import gTTS
 
 
 class browsePage(ListView):
@@ -31,9 +32,16 @@ def searchBook(request):
         results_author = Book.objects.all().filter(author__in=search)
         results_tags = Book.objects.all().filter(tags__name__in=search)
         matches = results_title | results_author | results_tags
-        # p = Paginator(matches, 10)
 
-        ctx = {'matches': matches}
+        # p = Paginator(matches, 10)
+        # page_num = request.GET.get('page', 1)
+
+        # try:
+        #     page = p.page(page_num)
+        # except EmptyPage:
+        #     page = p.page(1)
+
+        ctx = {'page_obj': matches}
         return render(request, 'books/search.html', ctx)
 
 

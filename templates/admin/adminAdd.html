@@ -1,6 +1,6 @@
 {% extends 'adminBase.html' %}
 {% load static %}
-{% block title %} Adding New Book {% endblock%}
+{% block title %} Editando Livro {% endblock%}
 
 {% block content %}
 
@@ -16,7 +16,7 @@
                 <div class="AccountContainer__Detail-Button">
                     <input type="file" accept="image/*" name="cover" id="cover">
                     <label for="cover">
-                        Change Cover
+                        Mudar Capa
                     </label>
                 </div>
             </a>
@@ -41,20 +41,20 @@
 
             <a class="AdminForm__Button-Submit">
                 <div class="AdminForm__Book-Button">
-                    <input type="number" name="amount" placeholder="Book Amount">
+                    <input type="number" name="amount" placeholder="Quantidade">
                 </div>
             </a>
 
             <a class="AdminForm__Button-Submit">
                 <div class="AdminForm__Book-Button">
-                    <input type="submit" value="Add">
+                    <input type="submit" value="Adicionar">
                 </div>
             </a>
 
 
             <a class="AdminForm__Book-Link" href="{% url 'adminBrowse' %}">
                 <div class="AdminForm__Book-Button">
-                    Back
+                    Voltar
                 </div>
             </a>
 
@@ -63,39 +63,39 @@
 
         <div class="AdminForm__Book-Wrapper">
             <div class="AdminForm__Book-Title">
-                Title: <input type="text" name="title" value="{{ book.title }}">
+                Titulo: <input type="text" name="title" value="{{ book.title }}">
             </div>
 
             <div class="AdminForm__Book-Author">
-                Author: <input type="text" name="author" value="{{ book.author }}">
+                Autor: <input type="text" name="author" value="{{ book.author }}">
             </div>
 
             <div class="AdminForm__Book-Details">
                 <div>
-                    Published: <input type="text" name="date_published" value="{{ book.date_published }}">
+                    Data: <input type="text" name="date_published" value="{{ book.date_published }}">
                 </div>
 
                 <div>
-                    Publisher: <input type="text" name="publisher" value="{{ book.publisher }}">
+                    Editora: <input type="text" name="publisher" value="{{ book.publisher }}">
                 </div>
 
                 <div>
-                    Languague: <input type="text" name="language" value="{{ book.language }}">
+                    Lingua: <input type="text" name="language" value="{{ book.language }}">
                 </div>
             </div>
 
             <div class="AdminForm__Book-Desc">
-                Description: <textarea name="description">{{ book.description }}</textarea>
+                Descricao: <textarea name="description">{{ book.description }}</textarea>
             </div>
 
             <div class="AdminForm__Book-Desc">
-                Content: <textarea name="content">{{ book.content }}</textarea>
+                Conteudo: <textarea name="content">{{ book.content }}</textarea>
             </div>
 
             <div class="AdminForm__Book-Details">
                 <div>
                     Tags: <input type="text" name="tags">
-                    *Separate by comma*
+                    *Separado por virgula*
                 </div>
             </div>
 

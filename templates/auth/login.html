@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Login {% endblock%}
+{% block title %} Logar {% endblock%}
 
 {% block content %}
 
 <main>
-    <form class="LoginForm" action="" method="POST" autocomplete="off">
+    <form class="Login" action="" method="POST" autocomplete="off">
         {% csrf_token %}
 
-        <h1 class="LoginForm__Title">Login</h1>
+        <h1 class="Login__Title">Logar</h1>
 
-        <div class="LoginForm__Field">
+        <div class="Login__Field">
             <input type="email" name="email" placeholder="email">
         </div>
 
-        <div class="LoginForm__Field">
-            <input type="password" name="password" placeholder="password">
+        <div class="Login__Field">
+            <input type="password" name="password" placeholder="senha">
         </div>
 
-        <div class="LoginForm__Field-Submit">
-            <input type="submit" placeholder="Submit">
+        <div class="Login__Field-Submit">
+            <input type="submit" value="Entrar">
         </div>
     </form>
 </main>
