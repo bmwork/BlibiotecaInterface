@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from .models import Book
 import json
 from users.models import Customer
-from books.models import Review
+from books.models import Review, Page
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage
 from gtts import gTTS
@@ -27,6 +27,7 @@ class browseAdminPage(ListView):
 def searchBook(request):
     if request.method == "GET":
         search = request.GET.get('search')
+        search = search.lower()
         search = search.split(' ')
         results_title = Book.objects.all().filter(title__in=search)
         results_author = Book.objects.all().filter(author__in=search)
@@ -189,26 +190,14 @@ def bookEditPage(request, slug):
         description = request.POST.get('description')
         content = request.POST.get('content')
 
+        pages = request.FILES.getlist('page')
         cover = request.FILES.get('cover')
         pdf = request.FILES.get('pdf')
         mp3 = request.FILES.get('mp3')
 
-        tags = request.POST.get('tags')
-        tags = tags.split(",")
-
-        if not cover or not pdf or not mp3:
-            return redirect('adminEdit', slug)
-
-        book.cover = cover
-        book.pdf_file = pdf
-        book.mp3_file = mp3
-
-        all_tags = book.tags.all()
-        for tag in all_tags:
-            tag.delete()
-
-        for tag in tags:
-            book.tags.add(tag)
+        book.cover = book.cover
+        book.pdf_file = book.pdf_file
+        book.mp3_file = book.mp3_file
 
         book.title = title
         book.author = author
@@ -217,6 +206,32 @@ def bookEditPage(request, slug):
         book.language = language
         book.description = description
         book.content = content
+
+        if cover:
+            book.cover = cover
+
+        if pdf:
+            book.pdf_file = pdf
+
+        if mp3:
+            book.mp3_file = mp3
+
+        tags = request.POST.get('tags')
+        tags = tags.split(",")
+
+        every_tag = book.tags.all()
+        for tag in every_tag:
+            tag.delete()
+
+        for tag in tags:
+            book.tags.add(tag)
+
+        if pages:
+            book.pages.all().delete()
+            for page in pages:
+                new_page = Page.objects.create(book=book, image=page)
+                new_page.save()
+
         book.save()
         return redirect('adminBrowse')
 
@@ -237,35 +252,26 @@ def bookAddPage(request):
         publisher = request.POST.get('publisher')
         language = request.POST.get('language')
         description = request.POST.get('description')
-        content = request.POST.get('content')
 
         cover = request.FILES.get('cover')
+        pages = request.FILES.getlist('page')
         pdf = request.FILES.get('pdf')
         mp3 = request.FILES.get('mp3')
 
         tags = request.POST.get('tags')
         tags = tags.split(",")
 
-        if not cover or not pdf or not mp3:
-            return redirect('adminAdd')
-
-        amount = request.POST.get('amount')
-        if amount:
-            for x in range(int(amount)):
-                book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
-                                           publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
-                for tag in tags:
-                    book.tags.add(tag)
-                book.save()
-            return redirect('adminBrowse')
-
         book = Book.objects.create(cover=cover, title=title, author=author, date_published=date_published,
-                                   publisher=publisher, language=language, description=description, content=content, pdf_file=pdf, mp3_file=mp3)
-
+                                   publisher=publisher, language=language, description=description,
+                                   pdf_file=pdf, mp3_file=mp3)
         for tag in tags:
             book.tags.add(tag)
 
         book.save()
+
+        for page in pages:
+            new_page = Page.objects.create(book=book, image=page)
+            new_page.save()
         return redirect('adminBrowse')
 
     return render(request, 'admin/adminAdd.html')

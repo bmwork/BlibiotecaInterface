@@ -14,16 +14,25 @@
 
             <a class="AccountContainer__Detail-Link">
                 <div class="AccountContainer__Detail-Button">
-                    <input type="file" accept="image/*" name="cover" id="cover">
+                    <input type="file" accept="image/*" name="cover" id="cover" required>
                     <label for="cover">
-                        Mudar Capa
+                        Capa
                     </label>
                 </div>
             </a>
 
             <a class="AccountContainer__Detail-Link">
                 <div class="AccountContainer__Detail-Button">
-                    <input name="pdf" id="pdf" type="file" accept="application/pdf">
+                    <input type="file" multiple accept="image/*" name="page" id="page" required>
+                    <label for="page">
+                        Paginas
+                    </label>
+                </div>
+            </a>
+
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
+                    <input name="pdf" id="pdf" type="file" accept="application/pdf" required>
                     <label for="pdf">
                         PDF
                     </label>
@@ -32,16 +41,10 @@
 
             <a class="AccountContainer__Detail-Link">
                 <div class="AccountContainer__Detail-Button">
-                    <input name="mp3" id="mp3" type="file" accept="audio/mpeg">
+                    <input name="mp3" id="mp3" type="file" accept="audio/mpeg" required>
                     <label for="mp3">
                         MP3
                     </label>
-                </div>
-            </a>
-
-            <a class="AdminForm__Button-Submit">
-                <div class="AdminForm__Book-Button">
-                    <input type="number" name="amount" placeholder="Quantidade">
                 </div>
             </a>
 
@@ -63,24 +66,24 @@
 
         <div class="AdminForm__Book-Wrapper">
             <div class="AdminForm__Book-Title">
-                Titulo: <input type="text" name="title" value="{{ book.title }}">
+                Titulo: <input type="text" name="title" required>
             </div>
 
             <div class="AdminForm__Book-Author">
-                Autor: <input type="text" name="author" value="{{ book.author }}">
+                Autor: <input type="text" name="author" required>
             </div>
 
             <div class="AdminForm__Book-Details">
                 <div>
-                    Data: <input type="text" name="date_published" value="{{ book.date_published }}">
+                    Data: <input type="text" name="date_published" required>
                 </div>
 
                 <div>
-                    Editora: <input type="text" name="publisher" value="{{ book.publisher }}">
+                    Editora: <input type="text" name="publisher" required>
                 </div>
 
                 <div>
-                    Lingua: <input type="text" name="language" value="{{ book.language }}">
+                    Lingua: <input type="text" name="language" required>
                 </div>
             </div>
 
@@ -88,13 +91,9 @@
                 Descricao: <textarea name="description">{{ book.description }}</textarea>
             </div>
 
-            <div class="AdminForm__Book-Desc">
-                Conteudo: <textarea name="content">{{ book.content }}</textarea>
-            </div>
-
             <div class="AdminForm__Book-Details">
                 <div>
-                    Tags: <input type="text" name="tags">
+                    Tags: <input type="text" name="tags" required>
                     *Separado por virgula*
                 </div>
             </div>

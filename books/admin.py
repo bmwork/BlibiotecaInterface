@@ -4,3 +4,4 @@ from . import models
 
 admin.site.register(models.Book)
 admin.site.register(models.Review)
+admin.site.register(models.Page)

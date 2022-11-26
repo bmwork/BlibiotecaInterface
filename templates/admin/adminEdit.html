@@ -23,6 +23,15 @@
 
             <a class="AccountContainer__Detail-Link">
                 <div class="AccountContainer__Detail-Button">
+                    <input type="file" multiple accept="image/*" name="page" id="page">
+                    <label for="page">
+                        Paginas
+                    </label>
+                </div>
+            </a>
+
+            <a class="AccountContainer__Detail-Link">
+                <div class="AccountContainer__Detail-Button">
                     <input name="pdf" id="pdf" type="file" accept="application/pdf" value="{{ book.pdf_file }}">
                     <label for="pdf">
                         PDF
@@ -86,10 +95,6 @@
 
             <div class="AdminForm__Book-Desc">
                 Descricao: <textarea name="description">{{ book.description }}</textarea>
-            </div>
-
-            <div class="AdminForm__Book-Desc">
-                Conteudo: <textarea name="content">{{ book.content }}</textarea>
             </div>
 
             <div class="AdminForm__Book-Details">

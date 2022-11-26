@@ -20,7 +20,7 @@
                 {{ book.title }}
 
                 <div>
-                    <!-- <a class="InventoryContainer__Book-Button" href="">Ler</a> -->
+                    <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Ler</a>
                     <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
                     <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
                     <!-- <a class="InventoryContainer__Book-Button" href="#">Retornar</a> -->
