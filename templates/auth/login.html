@@ -18,6 +18,22 @@
             <input type="password" name="password" placeholder="senha">
         </div>
 
+        {% if messages %}
+        {% for message in messages %}
+
+        <div class="Message-Wrapper">
+            <div class="Message {{ message.tags }}">
+                {{ message }}
+                <!-- <label for="msg-button">
+                    <i class="fa-solid fa-x"></i>
+                </label>
+                <button id="msg-button" name="msg-button" type="button"></button> -->
+            </div>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+
         <div class="Login__Field-Submit">
             <input type="submit" value="Entrar">
         </div>

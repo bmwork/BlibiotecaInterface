@@ -8,6 +8,7 @@ from books.models import Review, Page
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage
 from gtts import gTTS
+from django.contrib import messages
 
 
 class browsePage(ListView):
@@ -104,11 +105,13 @@ def visualizeBookPage(request, slug):
             if rating == 5:
                 book.five_star += 1
                 book.save()
+            messages.success(request, "Review feito com sucesso!")
 
-        if comment:
+        if comment and comment != "":
             review = Review.objects.create(
                 book=book, name=name, body=comment)
             review.save()
+            messages.success(request, "Comentario feito com sucesso!")
 
     return render(request, 'books/visualize.html', ctx)
 
@@ -118,6 +121,8 @@ def borrowBook(request, slug):
         book = Book.objects.get(uuid=slug)
         request.user.inventory.add(book)
         request.user.save()
+
+        messages.success(request, "Livro adicionado ao seu inventario!")
         return redirect('inventory')
 
     return redirect('visualize', slug)
@@ -174,7 +179,8 @@ def favoriteBookPage(request, slug):
 
     # Save the changes.
     obj.save()
-    return redirect("inventory")
+    messages.success(request, "Livro adicionado a lista de desejos!")
+    return redirect("wishlist")
 
 
 def bookEditPage(request, slug):
@@ -233,6 +239,7 @@ def bookEditPage(request, slug):
                 new_page.save()
 
         book.save()
+        messages.success(request, "Livro editado com sucesso!")
         return redirect('adminBrowse')
 
     return render(request, 'admin/adminEdit.html', ctx)
@@ -241,6 +248,7 @@ def bookEditPage(request, slug):
 def bookDelPage(request, slug):
     book = Book.objects.get(uuid=slug)
     book.delete()
+    messages.success(request, "Livro deletado com sucesso!")
     return redirect('adminBrowse')
 
 
@@ -272,6 +280,8 @@ def bookAddPage(request):
         for page in pages:
             new_page = Page.objects.create(book=book, image=page)
             new_page.save()
+
+        messages.success(request, "Livro criado com sucesso!")
         return redirect('adminBrowse')
 
     return render(request, 'admin/adminAdd.html')

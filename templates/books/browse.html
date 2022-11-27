@@ -4,96 +4,118 @@
 
 {% block content %}
 
+
 <main>
+    <div class="BrowseWrapper">
+        <div class="BrowseContainer-Top">
+            {% if messages %}
+            {% for message in messages %}
 
-    <div class="BrowseContainer">
-        <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
-            <div class="BrowseContainer__SearchBar">
-                <input type="text" name="search" placeholder="Buscar...">
-                <div class="BrowseContainer__SearchBar-Btn">
-                    <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
-                    <input type="submit" id="submit" value="">
+            <div class="Message-Wrapper">
+                <div class="Message {{ message.tags }}">
+                    {{ message }}
+                    <label for="msg-button">
+                        <i class="fa-solid fa-x"></i>
+                    </label>
+                    <button id="msg-button" name="msg-button" type="button"></button>
                 </div>
             </div>
-        </form>
-        {% for book in books %}
-        <div class="BrowseContainer__Book">
-            <a href="{% url 'visualize' book.uuid %}">
 
-                <div class="BrowseContainer__Book-Cover">
-                    <img src="{{ book.cover.url }}">
-                </div>
-
-            </a>
-            <div class="BrowseContainer__Book-Button">
-                <a href="{% url 'borrow' book.uuid %}">Emprestar</a>
-            </div>
+            {% endfor %}
+            {% endif %}
         </div>
-        {% endfor %}
 
-        <div class="BrowseContainer__Paginator">
-            {% if page_obj.has_previous %}
-            <a href="?page=1" class="BrowseContainer__Paginator-Button">
-                <div>
-                    &lt;&lt;
+        <div class="BrowseContainer">
+            <form action="{% url 'search' %}" method="get" class="BrowseContainer__SearchBar-Wrapper">
+                <div class="BrowseContainer__SearchBar">
+                    <input type="text" name="search" placeholder="Buscar...">
+                    <div class="BrowseContainer__SearchBar-Btn">
+                        <label for="submit"><i class="fa-solid fa-magnifying-glass fa-2x"></i></label>
+                        <input type="submit" id="submit" value="">
+                    </div>
                 </div>
-            </a>
+            </form>
+            {% for book in books %}
+            <div class="BrowseContainer__Book">
+                <a href="{% url 'visualize' book.uuid %}">
 
-            <a href="?page={{ page_obj.previous_page_number }}" class="BrowseContainer__Paginator-Button">
-                <div>
-                    {{ page_obj.previous_page_number }}
+                    <div class="BrowseContainer__Book-Cover">
+                        <img src="{{ book.cover.url }}">
+                    </div>
+
+                </a>
+                <div class="BrowseContainer__Book-Button">
+                    <a href="{% url 'borrow' book.uuid %}">Emprestar</a>
                 </div>
-            </a>
-            {% else %}
-            <a href="" class="BrowseContainer__Paginator-Button disabled">
-                <div>
-                    &lt;&lt;
-                </div>
-            </a>
+            </div>
+            {% endfor %}
 
-            <a href="" class="BrowseContainer__Paginator-Button disabled">
-                <div>
-                </div>
-            </a>
-            {% endif %}
+            <div class="BrowseContainer__Paginator">
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="BrowseContainer__Paginator-Button">
+                    <div>
+                        &lt;&lt;
+                    </div>
+                </a>
 
-            <a href="" class="BrowseContainer__Paginator-Button">
-                <div>
-                    ...
-                </div>
-            </a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="BrowseContainer__Paginator-Button">
+                    <div>
+                        {{ page_obj.previous_page_number }}
+                    </div>
+                </a>
+                {% else %}
+                <a href="" class="BrowseContainer__Paginator-Button disabled">
+                    <div>
+                        &lt;&lt;
+                    </div>
+                </a>
 
-            {% if page_obj.has_next %}
+                <a href="" class="BrowseContainer__Paginator-Button disabled">
+                    <div>
+                    </div>
+                </a>
+                {% endif %}
 
-            <a href="?page={{ page_obj.next_page_number }}" class="BrowseContainer__Paginator-Button">
-                <div>
-                    {{ page_obj.next_page_number }}
-                </div>
-            </a>
+                <a href="" class="BrowseContainer__Paginator-Button">
+                    <div>
+                        ...
+                    </div>
+                </a>
 
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="BrowseContainer__Paginator-Button">
-                <div>
-                    &gt;&gt;
-                </div>
-            </a>
-            {% else %}
+                {% if page_obj.has_next %}
 
-            <a href="" class="BrowseContainer__Paginator-Button disabled">
-                <div>
-                </div>
-            </a>
+                <a href="?page={{ page_obj.next_page_number }}" class="BrowseContainer__Paginator-Button">
+                    <div>
+                        {{ page_obj.next_page_number }}
+                    </div>
+                </a>
 
-            <a href="" class="BrowseContainer__Paginator-Button disabled">
-                <div>
-                    &gt;&gt;
-                </div>
-            </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="BrowseContainer__Paginator-Button">
+                    <div>
+                        &gt;&gt;
+                    </div>
+                </a>
+                {% else %}
 
-            {% endif %}
+                <a href="" class="BrowseContainer__Paginator-Button disabled">
+                    <div>
+                    </div>
+                </a>
+
+                <a href="" class="BrowseContainer__Paginator-Button disabled">
+                    <div>
+                        &gt;&gt;
+                    </div>
+                </a>
+
+                {% endif %}
+            </div>
         </div>
     </div>
     </div>
 
 </main>
+
+<script defer src="{% static 'js/msg-btn.js' %}"></script>
 
 {% endblock %}

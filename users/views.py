@@ -19,9 +19,8 @@ def loginUser(request):
 
         try:
             username = Customer.objects.get(email=email)
-            print(username)
         except Customer.DoesNotExist:
-            messages.warning(request, "Email not registered")
+            messages.warning(request, "Email nao cadastrado!")
             return redirect('login')
 
         user = authenticate(request, username=username, password=password)
@@ -32,10 +31,11 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             request.session["name"] = email
+            messages.success(request, "Voce entrou com sucesso!")
             return redirect('browse')
 
         else:
-            messages.warning(request, "Password incorrect")
+            messages.warning(request, "Senha incorreta!")
             return redirect('login')
 
     return render(request, 'auth/login.html')
@@ -53,20 +53,24 @@ def registerUser(request):
         password2 = request.POST.get('password2')
         # Filters the username to be unique
 
+        if (username == "") or (email == "") or (password1 == ""):
+            messages.warning(request, "Um ou mais campos estao vazios!")
+            return redirect('register')
+
         if Customer.objects.filter(username=username).exists():
-            messages.warning(request, "Username already registered")
+            messages.warning(request, "Usuario ja cadastrado!")
             return redirect('register')
 
         # Check if the passwords match
 
         if password1 != password2:
-            messages.warning(request, "Passwords dont match")
+            messages.warning(request, "Senhas nao conferem!")
             return redirect('register')
 
         # Filters the email in the database
 
         if Customer.objects.filter(email=email).exists():
-            messages.warning(request, "Email already registered")
+            messages.warning(request, "Email ja cadastrado!")
             return redirect('register')
 
         else:
@@ -78,6 +82,7 @@ def registerUser(request):
             user.set_password(password1)
             user.save()
 
+            messages.success(request, "Conta criada com sucesso!")
             return redirect('login')
 
     return render(request, 'auth/register.html')
@@ -103,7 +108,6 @@ def wishlist(request):
         wl_books.append(casted_uuid)
 
     ctx = {"wishlist": wl_books}
-    print(wl_books, "AAAAAAAAAAAAAAAAAAAAAAAA")
 
     return render(request, 'users/wishlist.html', ctx)
 
@@ -120,19 +124,23 @@ def accountPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
         picture = request.FILES.get('picture')
 
-        if not picture:
+        if username == "":
+            messages.warning(request, "Campo de usuario vazio!")
             return redirect('account')
 
-        request.user.picture = picture
+        request.user.picture = request.user.picture
         request.user.username = username
         request.user.email = email
-        request.user.set_password(password)
+
+        if picture:
+            request.user.picture = picture
+
         request.user.save()
 
         logout(request)
+        messages.success(request, "Sucesso ao atualizar seus dados!")
         return redirect('login')
 
     return render(request, 'users/account.html')

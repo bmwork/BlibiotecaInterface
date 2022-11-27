@@ -1,107 +1,128 @@
 {% extends 'adminBase.html' %}
 {% load static %}
-{% block title %} Editando Livro {% endblock%}
+{% block title %} Adicionado Livro {% endblock%}
 
 {% block content %}
 
 <main>
-    <form class="AdminForm" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="AdminForm__Book">
-            <div class="AdminForm__Book-Cover">
-                <img src="{{ book.cover.url }}">
+    <div class="AdminWrapper">
+        <div class="AdminContainer-Top">
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="Message-Wrapper">
+                <div class="Message {{ message.tags }}">
+                    {{ message }}
+                    <label for="msg-button">
+                        <i class="fa-solid fa-x"></i>
+                    </label>
+                    <button id="msg-button" name="msg-button" type="button"></button>
+                </div>
             </div>
 
-            <a class="AccountContainer__Detail-Link">
-                <div class="AccountContainer__Detail-Button">
-                    <input type="file" accept="image/*" name="cover" id="cover" required>
-                    <label for="cover">
-                        Capa
-                    </label>
-                </div>
-            </a>
-
-            <a class="AccountContainer__Detail-Link">
-                <div class="AccountContainer__Detail-Button">
-                    <input type="file" multiple accept="image/*" name="page" id="page" required>
-                    <label for="page">
-                        Paginas
-                    </label>
-                </div>
-            </a>
-
-            <a class="AccountContainer__Detail-Link">
-                <div class="AccountContainer__Detail-Button">
-                    <input name="pdf" id="pdf" type="file" accept="application/pdf" required>
-                    <label for="pdf">
-                        PDF
-                    </label>
-                </div>
-            </a>
-
-            <a class="AccountContainer__Detail-Link">
-                <div class="AccountContainer__Detail-Button">
-                    <input name="mp3" id="mp3" type="file" accept="audio/mpeg" required>
-                    <label for="mp3">
-                        MP3
-                    </label>
-                </div>
-            </a>
-
-            <a class="AdminForm__Button-Submit">
-                <div class="AdminForm__Book-Button">
-                    <input type="submit" value="Adicionar">
-                </div>
-            </a>
-
-
-            <a class="AdminForm__Book-Link" href="{% url 'adminBrowse' %}">
-                <div class="AdminForm__Book-Button">
-                    Voltar
-                </div>
-            </a>
-
-
+            {% endfor %}
+            {% endif %}
         </div>
-
-        <div class="AdminForm__Book-Wrapper">
-            <div class="AdminForm__Book-Title">
-                Titulo: <input type="text" name="title" required>
-            </div>
-
-            <div class="AdminForm__Book-Author">
-                Autor: <input type="text" name="author" required>
-            </div>
-
-            <div class="AdminForm__Book-Details">
-                <div>
-                    Data: <input type="text" name="date_published" required>
+        <form class="AdminForm" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="AdminForm__Book">
+                <div class="AdminForm__Book-Cover">
+                    <img src="{{ book.cover.url }}">
                 </div>
 
-                <div>
-                    Editora: <input type="text" name="publisher" required>
-                </div>
+                <a class="AccountContainer__Detail-Link">
+                    <div class="AccountContainer__Detail-Button">
+                        <input type="file" accept="image/*" name="cover" id="cover" required>
+                        <label for="cover">
+                            Capa
+                        </label>
+                    </div>
+                </a>
 
-                <div>
-                    Lingua: <input type="text" name="language" required>
-                </div>
+                <a class="AccountContainer__Detail-Link">
+                    <div class="AccountContainer__Detail-Button">
+                        <input type="file" multiple accept="image/*" name="page" id="page" required>
+                        <label for="page">
+                            Paginas
+                        </label>
+                    </div>
+                </a>
+
+                <a class="AccountContainer__Detail-Link">
+                    <div class="AccountContainer__Detail-Button">
+                        <input name="pdf" id="pdf" type="file" accept="application/pdf" required>
+                        <label for="pdf">
+                            PDF
+                        </label>
+                    </div>
+                </a>
+
+                <a class="AccountContainer__Detail-Link">
+                    <div class="AccountContainer__Detail-Button">
+                        <input name="mp3" id="mp3" type="file" accept="audio/mpeg" required>
+                        <label for="mp3">
+                            MP3
+                        </label>
+                    </div>
+                </a>
+
+                <a class="AdminForm__Button-Submit">
+                    <div class="AdminForm__Book-Button">
+                        <input type="submit" value="Adicionar">
+                    </div>
+                </a>
+
+
+                <a class="AdminForm__Book-Link" href="{% url 'adminBrowse' %}">
+                    <div class="AdminForm__Book-Button">
+                        Voltar
+                    </div>
+                </a>
+
+
             </div>
 
-            <div class="AdminForm__Book-Desc">
-                Descricao: <textarea name="description">{{ book.description }}</textarea>
-            </div>
-
-            <div class="AdminForm__Book-Details">
-                <div>
-                    Tags: <input type="text" name="tags" required>
-                    *Separado por virgula*
+            <div class="AdminForm__Book-Wrapper">
+                <div class="AdminForm__Book-Title">
+                    Titulo: <input type="text" name="title" required>
                 </div>
+
+                <div class="AdminForm__Book-Author">
+                    Autor: <input type="text" name="author" required>
+                </div>
+
+                <div class="AdminForm__Book-Details">
+                    <div>
+                        Data: <input type="text" name="date_published" required>
+                    </div>
+
+                    <div>
+                        Editora: <input type="text" name="publisher" required>
+                    </div>
+
+                    <div>
+                        Lingua: <input type="text" name="language" required>
+                    </div>
+                </div>
+
+                <div class="AdminForm__Book-Desc">
+                    Descricao: <textarea name="description">{{ book.description }}</textarea>
+                </div>
+
+                <div class="AdminForm__Book-Details">
+                    <div>
+                        Tags: <input type="text" name="tags" required>
+                        *Separado por virgula*
+                    </div>
+                </div>
+
             </div>
 
-        </div>
 
-        </div>
-    </form>
+        </form>
+    </div>
 </main>
+
+<script defer src="{% static 'js/msg-btn.js' %}"></script>
 
 {% endblock %}

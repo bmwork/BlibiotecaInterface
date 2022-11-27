@@ -4,81 +4,86 @@
 
 {% block content %}
 <main>
+    <div class="AccountWrapper">
+        <div class="AccountContainer-Top">
+            {% if messages %}
+            {% for message in messages %}
 
-    <form class="AccountContainer" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="AccountContainer__Detail">
-            <div class="AccountContainer__Detail-Pic">
-                <img src="{{ request.user.picture.url }}">
-            </div>
-
-
-            <a class="AccountContainer__Detail-Link">
-                <div id="AccountName" class="AccountContainer__Detail-Button">
-                    {{ request.user.username }}
-                </div>
-            </a>
-
-            <a class="AccountContainer__Detail-Link">
-                <div class="AccountContainer__Detail-Button">
-                    <input type="file" accept="image/*" name="picture" id="picture">
-                    <label for="picture">
-                        Mudar foto de perfil
+            <div class="Message-Wrapper">
+                <div class="Message {{ message.tags }}">
+                    {{ message }}
+                    <label for="msg-button">
+                        <i class="fa-solid fa-x"></i>
                     </label>
+                    <button id="msg-button" name="msg-button" type="button"></button>
                 </div>
-            </a>
+            </div>
 
+            {% endfor %}
+            {% endif %}
         </div>
 
-        <div class="AccountContainer__Detail-Wrapper">
-            <div class="AccountContainer__Detail-Title">
-                Informacao Pessoal
+        <form class="AccountContainer" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="AccountContainer__Detail">
+                <div class="AccountContainer__Detail-Pic">
+                    <img src="{{ request.user.picture.url }}">
+                </div>
+
+
+                <a class="AccountContainer__Detail-Link">
+                    <div id="AccountName" class="AccountContainer__Detail-Button">
+                        {{ request.user.username }}
+                    </div>
+                </a>
+
+                <a class="AccountContainer__Detail-Link">
+                    <div class="AccountContainer__Detail-Button">
+                        <input type="file" accept="image/*" name="picture" id="picture">
+                        <label for="picture">
+                            Mudar foto de perfil
+                        </label>
+                    </div>
+                </a>
+
             </div>
 
-            <div class="AccountContainer__Detail-Field">
-                <div class="AccountContainer__Detail-Label">
-                    Usuario
+            <div class="AccountContainer__Detail-Wrapper">
+                <div class="AccountContainer__Detail-Title">
+                    Informacao Pessoal
                 </div>
 
-                <div class="AccountContainer__Detail-Input">
-                    <input type="text" name="username" placeholder="{{ request.user.username }}">
+                <div class="AccountContainer__Detail-Field">
+                    <div class="AccountContainer__Detail-Label">
+                        Usuario
+                    </div>
+
+                    <div class="AccountContainer__Detail-Input">
+                        <input type="text" name="username" value="{{ request.user.username }}">
+                    </div>
                 </div>
+
+                <div class="AccountContainer__Detail-Field">
+                    <div class="AccountContainer__Detail-Label">
+                        Email
+                    </div>
+
+                    <div class="AccountContainer__Detail-Input">
+                        <input type="email" name="email" value="{{ request.user.email }}">
+                    </div>
+                </div>
+
+                <div class="AccountContainer__Detail-Submit">
+                    <div>
+                        <input type="submit" value="Atualizar">
+                    </div>
+                </div>
+
             </div>
-
-            <div class="AccountContainer__Detail-Field">
-                <div class="AccountContainer__Detail-Label">
-                    Email
-                </div>
-
-                <div class="AccountContainer__Detail-Input">
-                    <input type="email" name="email" placeholder="{{ request.user.email }}">
-                </div>
-            </div>
-
-            <div class="AccountContainer__Detail-Field">
-                <div class="AccountContainer__Detail-Label">
-                    senha
-                </div>
-
-                <div class="AccountContainer__Detail-Input">
-                    <input type="password" name="password" placeholder="*******...">
-                </div>
-            </div>
-
-            <div class="AccountContainer__Detail-Submit">
-
-                <div>
-                    <input type="submit" value="Atualizar">
-                </div>
-            </div>
-
-
-        </div>
-
-    </form>
-
-    </div>
+        </form>
     </div>
 </main>
+
+<script defer src="{% static 'js/msg-btn.js' %}"></script>
 
 {% endblock %}

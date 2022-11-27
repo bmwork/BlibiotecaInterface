@@ -5,34 +5,54 @@
 {% block content %}
 
 <main>
-    <div class="InventoryContainer">
-        <h1 class="InventoryContainer__Title">Seus Livros</h1>
-        {% for book in owned_books %}
+    <div class="InventoryWrapper">
+        <div class="InventoryContainer-Top">
+            {% if messages %}
+            {% for message in messages %}
 
-        <div class="InventoryContainer__Book">
-            <a href="{% url 'visualize' book.uuid %}">
-                <div class="InventoryContainer__Book-Cover">
-                    <img src="{{ book.cover.url }}">
+            <div class="Message-Wrapper">
+                <div class="Message {{ message.tags }}">
+                    {{ message }}
+                    <label for="msg-button">
+                        <i class="fa-solid fa-x"></i>
+                    </label>
+                    <button id="msg-button" name="msg-button" type="button"></button>
                 </div>
-            </a>
+            </div>
 
-            <div class="InventoryContainer__Book-Info">
-                {{ book.title }}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="InventoryContainer">
+            <h1 class="InventoryContainer__Title">Seus Livros</h1>
+            {% for book in owned_books %}
 
-                <div>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Ler</a>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
-                    <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
-                    <!-- <a class="InventoryContainer__Book-Button" href="#">Retornar</a> -->
+            <div class="InventoryContainer__Book">
+                <a href="{% url 'visualize' book.uuid %}">
+                    <div class="InventoryContainer__Book-Cover">
+                        <img src="{{ book.cover.url }}">
+                    </div>
+                </a>
+
+                <div class="InventoryContainer__Book-Info">
+                    {{ book.title }}
+
+                    <div>
+                        <a class="InventoryContainer__Book-Button" href="{% url 'read' book.uuid %}">Ler</a>
+                        <a class="InventoryContainer__Book-Button" href="{% url 'mp3' book.uuid %}">Audio</a>
+                        <a class="InventoryContainer__Book-Button" href="{% url 'pdf' book.uuid %}">PDF</a>
+                        <!-- <a class="InventoryContainer__Book-Button" href="#">Retornar</a> -->
+                    </div>
+
                 </div>
 
             </div>
 
+            {% endfor %}
         </div>
-
-        {% endfor %}
-    </div>
     </div>
 </main>
+
+<script defer src="{% static 'js/msg-btn.js' %}"></script>
 
 {% endblock %}
