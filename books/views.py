@@ -19,7 +19,7 @@ class browsePage(ListView):
 
 class browseAdminPage(ListView):
     model = Book
-    template_name = 'admin/Adminbrowse.html'
+    template_name = 'admin/adminBrowse.html'
     paginate_by = 10
     context_object_name = 'books'
 
