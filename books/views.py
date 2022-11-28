@@ -7,7 +7,6 @@ from users.models import Customer
 from books.models import Review, Page
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage
-from gtts import gTTS
 from django.contrib import messages
 
 

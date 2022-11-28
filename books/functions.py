@@ -1,12 +1,6 @@
 from .models import Book
 import uuid
-from gtts import gTTS
 import os
-
-
-def bookTTS(textfield, language):
-    audio = gTTS(text=textfield, lang=language, slow=False)
-    return audio
 
 
 def get_by_uuid(query, uuid):
