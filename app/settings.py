@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g(l143jw!e#auw%da9vrk_33@y!c&f1fvjr*n_l&#4zkgyz-$t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['unit-biblioteca-prova.azurewebsites.net']
+ALLOWED_HOSTS = ['unit-biblioteca-prova.azurewebsites.net', '127.0.0.1']
 
 
 # Application definition

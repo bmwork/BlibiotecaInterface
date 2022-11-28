@@ -187,7 +187,10 @@ footer {
     bottom: 0;
     border-top: 0.2rem solid var(--bg-primary);
     color: var(--text-secondary);
-    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
 }
 
 .FooterWrapper {
@@ -259,6 +262,7 @@ footer {
 .BrowseContainer {
     display: flex;
     flex-wrap: wrap;
+    height: 77vh;
     margin-bottom: 2rem;
 }
 
@@ -443,7 +447,8 @@ footer {
     font-size: 1.6rem;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 65%;
+
 }
 
 .VisualizeContainer__Book-Title {
@@ -462,7 +467,6 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%;
 }
 
 .VisualizeContainer__Book-Desc textarea {
@@ -635,6 +639,7 @@ footer {
     display: flex;
     flex-direction: column;
     width: 65%;
+    height: 73vh;
     background-color: var(--bg-primary);
     color: rgb(216, 216, 216);
     overflow: hidden;
