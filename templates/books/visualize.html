@@ -35,11 +35,15 @@
                     </div>
                 </a>
 
+                {% if user.is_authenticated %}
+
                 <a class="VisualizeContainer__Book-Link" href="{% url 'favorite' book.uuid %}">
                     <div class="VisualizeContainer__Book-Button">
                         Adicionar aos favoritos
                     </div>
                 </a>
+
+                {% endif %}
 
                 <form action="" method="post" class="VisualizeContainer__Book-Rate">
                     {% csrf_token %}
