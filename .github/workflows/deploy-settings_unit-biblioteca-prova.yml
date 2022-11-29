@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'unit-biblioteca-prova'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E77355818F45479FBF84D6427402BEDF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8AB797BE78124B228EC149E20590C2CC }}
